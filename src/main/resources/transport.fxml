@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="506.0" prefWidth="701.0" style="-fx-background-color: #C6CED1;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Ajoutertransport">
+
+   <children>
+      <Button layoutX="530.0" layoutY="454.0" mnemonicParsing="false" onAction="#Ajoutertransport" prefHeight="41.0" prefWidth="88.0" style="-fx-background-color: #3A3A3C;" text="ajouter">
+         <font>
+            <Font size="19.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.20612306892871857" green="0.06880000233650208" blue="0.8600000143051147" opacity="0.8399999737739563" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill></Button>
+      <Label layoutX="251.0" layoutY="90.0" text="numero chaufeur" textFill="#100dc9">
+         <font>
+            <Font size="13.0" />
+         </font></Label>
+      <TextField fx:id="num_ch" layoutX="234.0" layoutY="109.0" />
+
+
+      <TextField fx:id="num_v" layoutX="230.0" layoutY="286.0" />
+      <Label layoutX="248.0" layoutY="143.0" text="date debut" textFill="#3913d1">
+         <font>
+            <Font name="System Italic" size="13.0" />
+         </font></Label>
+      <Label layoutX="243.0" layoutY="197.0" text="date fin" textFill="#2a12dc">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Label layoutX="232.0" layoutY="258.0" text="numero vehicule" textFill="#4412d9">
+         <font>
+            <Font size="13.0" />
+         </font></Label>
+      <Label layoutX="241.0" layoutY="318.0" text="cout" textFill="#1812cc">
+         <font>
+            <Font name="System Italic" size="13.0" />
+         </font></Label>
+      <TextField fx:id="cout" layoutX="231.0" layoutY="344.0" />
+      <AnchorPane layoutX="174.0" layoutY="-3.0" prefHeight="58.0" prefWidth="549.0" style="-fx-background-color: #325B69;">
+         <children>
+            <Button fx:id="button_ajouter" layoutY="-1.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="117.0" style="-fx-background-color: #325B69;" text="Ajouter" textFill="#fcc03e">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="button_modifier" layoutX="147.0" layoutY="-1.0" mnemonicParsing="false" onAction="#GoToUpdate" prefHeight="59.0" prefWidth="127.0" style="-fx-background-color: #325B69;" text="Modifier" textFill="#fcc03e">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="button_afficher" layoutX="281.0" layoutY="-1.0" mnemonicParsing="false" onAction="#GoToAfficher" prefHeight="59.0" prefWidth="111.0" style="-fx-background-color: #325B69;" text="Afficher" textFill="#fcc03e">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <DatePicker fx:id="ddId" layoutX="230.0" layoutY="162.0" />
+      <DatePicker fx:id="daId" layoutX="232.0" layoutY="224.0" />
+      <AnchorPane layoutY="-1.0" prefHeight="506.0" prefWidth="175.0" style="-fx-background-color: #325B69;">
+         <children>
+            <ImageView fitHeight="147.0" fitWidth="175.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../image/lm.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="buttontransport" layoutX="6.0" layoutY="130.0" mnemonicParsing="false" prefHeight="103.0" prefWidth="163.0" style="-fx-background-color: #325B69;" text="Transport" textFill="#fcc03e">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="buttontranspoteur" layoutY="225.0" mnemonicParsing="false" onAction="#GoTotranspoteur" prefHeight="103.0" prefWidth="175.0" style="-fx-background-color: #325B69;" text="Transpoteur" textFill="#fcc03e">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="buttonvehicule" layoutX="6.0" layoutY="338.0" mnemonicParsing="false" onAction="#GoTovehicule" prefHeight="136.0" prefWidth="163.0" style="-fx-background-color: #325B69;" text="vehicule" textFill="#fcc03e">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+
+   </children>
+</AnchorPane>
