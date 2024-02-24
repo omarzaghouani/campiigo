@@ -84,7 +84,23 @@ public class AfficherVehicule {
     }
 
 
-
+    @FXML
+    void supprimervehicule(ActionEvent event) {
+        try {
+            int num_v = Integer.parseInt(txtnum_ch_supp.getText());
+            VehiculeService psv = new VehiculeService() {
+            };
+            Vehicule v = psv.readBynum_v(num_v);
+            if (v != null) {
+                psv.delete(v);
+            } else {
+                System.out.println("Le vehicule avec num_v" + num_v + " n'existe pas.");
+            }
+        } catch (NumberFormatException e) {
+            // Gérer l'exception si la conversion en nombre échoue
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     void GoToAdd(ActionEvent event) {
@@ -124,23 +140,7 @@ public class AfficherVehicule {
 
     }
 
-    @FXML
-    void supprimervehicule(ActionEvent event) {
-        try {
-            int num_v = Integer.parseInt(txtnum_ch_supp.getText());
-            VehiculeService psv = new VehiculeService() {
-            };
-            Vehicule v = psv.readBynum_v(num_v);
-            if (v != null) {
-                psv.delete(v);
-            } else {
-                System.out.println("Le vehicule avec num_v" + num_v + " n'existe pas.");
-            }
-        } catch (NumberFormatException e) {
-            // Gérer l'exception si la conversion en nombre échoue
-            e.printStackTrace();
-        }
-    }
+
     @FXML
     void GoTovehicule(ActionEvent event) {
         try {

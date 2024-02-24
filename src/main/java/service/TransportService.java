@@ -2,7 +2,6 @@ package service;
 
 import entites.Transport;
 
-import entites.Vehicule;
 import utils.DataSource;
 
 import java.sql.*;
@@ -166,30 +165,38 @@ public class TransportService implements IService<Transport> {
         return null;
     }
 
-    /*@Override
-    public void  selectvandtranspoteur  (int num_ch) {
-        String query = "SELECT * FROM vehicule JOIN transport ON vehicule.num_v = transport.num_v";
-        try {
-            pst = conn.prepareStatement(query);
+    @Override
+   public void selectvandtranspoteur(int num_ch) {
+    String query = "SELECT * FROM vehicule JOIN transport ON vehicule.num_v = transport.num_v WHERE transport.num_ch = ?";
+    try {
+        // Prepare the statement with the SQL query
+        PreparedStatement pst = conn.prepareStatement(query);
 
-            rs = pst.executeQuery();
-            if (rs.next()) {
-                Vehicule v= new Vehicule();
-                v .setNum_v(rs.getInt("num_t"));
-                v.setNum_ch(rs.getInt("num_ch"));
-v.setType(rs.getString("type"));
-                v.setPrixuni(rs.getInt("prixuni"));
+        // Set the value of num_ch in the WHERE clause
+        pst.setInt(1, num_ch);
 
+        // Execute the query and obtain the ResultSet
+   ResultSet rs = pst.executeQuery();
 
-                return v;
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException("Erreur lors de la lecture du transport par num_ch", e);
-        } finally {
-            closeResources();
+        // Process the ResultSet
+        while (rs.next()) {
+            // Retrieve data from the ResultSet and utilize it as needed
+            int vehiculeId = rs.getInt("num_v");
+            // Retrieve other columns as needed
+
+            // Process the data or store it in appropriate data structures
         }
-        return null;
-    }*/
+
+        // Close the ResultSet and PreparedStatement
+        rs.close();
+        pst.close();
+    } catch (SQLException e) {
+        // Handle any SQL exceptions that may occur
+        e.printStackTrace(); // Or handle it according to your application's requirements
+    }
+}
+
+
     private void closeResources() {
         try {
             if (rs != null) rs.close();

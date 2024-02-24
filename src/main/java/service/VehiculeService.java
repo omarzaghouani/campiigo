@@ -64,9 +64,9 @@ public class VehiculeService implements VeService<Vehicule> {
             psv.setInt(1, vehicule.getNum_v());
             int rowsAffected = psv.executeUpdate();
             if (rowsAffected == 0) {
-                System.out.println("No records deleted for vehicule with num_t: " + vehicule.getNum_v());
+                System.out.println("No records deleted for vehicule with num_v: " + vehicule.getNum_v());
             } else {
-                System.out.println("Deleted vehicule with num_t: " + vehicule.getNum_v());
+                System.out.println("Deleted vehicule with num_v: " + vehicule.getNum_v());
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -77,7 +77,7 @@ public class VehiculeService implements VeService<Vehicule> {
 
     @Override
     public void update(Vehicule vehicule) {
-        String query = "UPDATE vehicule SET num_v= ?, type = ?, capacite = ?, prixuni = ?,  = ? WHERE num_v = ?";
+        String query = "UPDATE vehicule SET num_ch= ?, type = ?, capacite = ?, prixuni = ? WHERE num_v = ?";
         try (PreparedStatement psv = conn.prepareStatement(query)) {
             psv.setInt(1, vehicule.getNum_ch());
             psv.setString(2, vehicule.getType());
@@ -87,7 +87,7 @@ public class VehiculeService implements VeService<Vehicule> {
             psv.setInt(5, vehicule.getNum_v()); // Assuming num_v is the primary key
             int rowsAffected = psv.executeUpdate();
             if (rowsAffected == 0) {
-                System.out.println("No records updated for vehiculewith num_t: " + vehicule.getNum_v());
+                System.out.println("No records updated for vehiculewith num_v: " + vehicule.getNum_v());
             } else {
                 System.out.println("Updated vehicule with num_v: " + vehicule.getNum_v());
             }
@@ -96,6 +96,7 @@ public class VehiculeService implements VeService<Vehicule> {
             throw new RuntimeException(e); // If you prefer to throw a RuntimeException
         }
     }
+
 
 
     @Override

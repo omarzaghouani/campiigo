@@ -23,7 +23,7 @@
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button fx:id="buttonvehicule" layoutX="1.0" layoutY="341.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="144.0" style="-fx-background-color: #325B69;" text="vehicule" textFill="#fcc03e">
+            <Button fx:id="buttonvehicule" layoutX="1.0" layoutY="341.0" mnemonicParsing="false" onAction="#GoTovehicule" prefHeight="86.0" prefWidth="144.0" style="-fx-background-color: #325B69;" text="vehicule" textFill="#fcc03e">
                <font>
                   <Font size="20.0" />
                </font>

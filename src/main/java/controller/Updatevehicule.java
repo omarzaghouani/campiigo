@@ -13,11 +13,11 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import service.VehiculeService;
 import javafx.scene.image.Image;
-
+import javafx.fxml.Initializable;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-public class Updatevehicule {
+public class Updatevehicule implements Initializable {
     @FXML
     private Button button_ajouter;
 
@@ -51,16 +51,21 @@ public class Updatevehicule {
 
     @FXML
     private ChoiceBox<String> type;
-    private String[]vehicule ={"van famiial","van horizon","van aventure","van voyage","bus confort","bus","voiture4*4"};
+    private String[] vehicule = {"van famiial", "van horizon", "van aventure", "van voyage", "bus confort", "bus", "voiture4*4"};
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        type.getItems().addAll(vehicule);
+    } ;
 
     @FXML
-    void update(ActionEvent event) {
+    public void update(ActionEvent event) {
         try {
             int cpt = Integer.parseInt(capacite.getText());
             int num_ve = Integer.parseInt(num_v.getText());
             int prixunii = Integer.parseInt(prixuni.getText());
             String selectedType = type.getValue();
-            Vehicule v = new Vehicule(num_v, type, capacite, prixuni, num_ch);
+            int num=Integer.parseInt(num_ch.getText());
+            Vehicule v = new Vehicule(num_ve,selectedType , cpt, prixunii, num);
             VehiculeService psv = new VehiculeService() {
             };
             psv.update(v);

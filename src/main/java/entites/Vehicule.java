@@ -23,8 +23,8 @@ public class Vehicule {
 
     }
 
-    public Vehicule(TextField numV, ChoiceBox<String> type, TextField capacite, TextField prixuni, TextField numCh) {
-    }
+    /*public Vehicule(TextField numV, ChoiceBox<String> type, TextField capacite, TextField prixuni, TextField numCh) {
+    }*/
 
     public int getNum_v() {
         return num_v;

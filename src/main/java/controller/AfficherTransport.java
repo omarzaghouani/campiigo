@@ -138,11 +138,11 @@ public class AfficherTransport {
 
             try {
                 // Load the Event.fxml file
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/ajoutertranspoteur.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/transport.fxml"));
                 javafx.scene.Parent root = loader.load();
 
                 // Show the AfficherUser.fxml scene
-                Stage stage = (Stage) buttontranspoteur.getScene().getWindow();
+                Stage stage = (Stage) buttontransport.getScene().getWindow();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();
@@ -158,7 +158,7 @@ public class AfficherTransport {
     void GoTotranspoteur(ActionEvent event) {
         try {
             // Load the Event.fxml file
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ajoutertranspteur.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ajoutertranspoteur.fxml"));
             javafx.scene.Parent root = loader.load();
 
             // Show the AfficherUser.fxml scene

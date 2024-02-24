@@ -91,6 +91,24 @@ public class Affichertranspoteur {
     }
 
     @FXML
+    void supprimertransport(ActionEvent event) {
+        try {
+            int num_ch = Integer.parseInt(txtnum_ch_supp.getText());
+            TranspoteurService psr = new TranspoteurService() {
+            };
+            Transpoteur tr = psr.readBynum_ch(num_ch);
+            if (tr != null) {
+                psr.deletet(tr);
+
+            } else {
+                System.out.println("Le transpoteur avec num_ch" + num_ch + " n'existe pas.");
+            }
+        } catch (NumberFormatException e) {
+            // Gérer l'exception si la conversion en nombre échoue
+            e.printStackTrace();
+        }
+    }
+    @FXML
     void GoToAdd(ActionEvent event) {
         try {
             // Load the Event.fxml file
@@ -199,23 +217,6 @@ public class Affichertranspoteur {
         }
     }
 
-    @FXML
-    void supprimertransport(ActionEvent event) {
-        try {
-            int num_ch = Integer.parseInt(txtnum_ch_supp.getText());
-            TranspoteurService psr = new TranspoteurService() {
-            };
-            Transpoteur tr = psr.readBynum_ch(num_ch);
-            if (tr!= null) {
-                psr.deletet(tr);
 
-            } else {
-                System.out.println("Le transpoteur avec num_ch" + num_ch + " n'existe pas.");
-            }
-        } catch (NumberFormatException e) {
-            // Gérer l'exception si la conversion en nombre échoue
-            e.printStackTrace();
-        }
-    }
 
 }
