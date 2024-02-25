@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HomeController">
+   <children>
+      <ImageView fitHeight="800.0" fitWidth="1045.0" layoutX="-43.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@AdobeStock_639027159_Preview.jpeg" />
+         </image>
+      </ImageView>
+      <AnchorPane prefHeight="102.0" prefWidth="1001.0" style="-fx-background-color: #325B69;">
+         <children>
+            <MenuButton fx:id="aboutus" layoutX="208.0" layoutY="13.0" mnemonicParsing="false" onAction="#handleaboutusEntered" onMouseExited="#handleaboutusExited" prefHeight="75.0" prefWidth="150.0" style="-fx-background-color: #325B69;" text="ABOUT US" textFill="#ef5e10">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+                <MenuItem mnemonicParsing="false" text="Action 2" />
+              </items>
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </MenuButton>
+            <ImageView fitHeight="102.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@logoCampigo.png" />
+               </image>
+            </ImageView>
+            <MenuButton fx:id="ourservices" layoutX="418.0" layoutY="13.0" mnemonicParsing="false" onMouseEntered="#handleServicesEntered" onMouseExited="#handleServicesExited" prefHeight="75.0" prefWidth="165.0" style="-fx-background-color: #325B69;" text="OUR SERVICES" textFill="#ef5e10">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Action 1" />
+                  <MenuItem mnemonicParsing="false" text="Action 2" />
+               </items>
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </MenuButton>
+            <MenuButton fx:id="contactus" layoutX="660.0" layoutY="13.0" mnemonicParsing="false" onMouseEntered="#handleContactEntered" onMouseExited="#handleContctExited" prefHeight="75.0" prefWidth="150.0" style="-fx-background-color: #325B69;" text="CONTACT US" textFill="#ef5e10">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Action 1" />
+                  <MenuItem mnemonicParsing="false" text="Action 2" />
+               </items>
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </MenuButton>
+         </children>
+      </AnchorPane>
+      <Text fx:id="text1" fill="#ef5e10" layoutX="158.0" layoutY="277.0" strokeType="OUTSIDE" strokeWidth="0.0" text="It's All About Camping Management" wrappingWidth="664.7442626953125">
+         <font>
+            <Font name="System Italic" size="40.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="269.0" layoutY="342.0" strokeType="OUTSIDE" strokeWidth="0.0" text="When you want to go Camping, We help you">
+         <font>
+            <Font name="System Bold Italic" size="20.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="291.0" layoutY="377.0" strokeType="OUTSIDE" strokeWidth="0.0" text="effortlessly manage your camping trip">
+         <font>
+            <Font name="System Bold Italic" size="20.0" />
+         </font>
+      </Text>
+      <Button layoutX="396.0" layoutY="406.0" mnemonicParsing="false" style="-fx-background-color: #ff711a;" text="SIGN UP FREE">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="44.0" fitWidth="39.0" layoutX="536.0" layoutY="422.0" pickOnBounds="true" preserveRatio="true" rotate="-65.3">
+         <image>
+            <Image url="@icone (1).png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

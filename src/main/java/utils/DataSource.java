@@ -1,5 +1,8 @@
 package utils;
 
+import entities.utilisateur;
+import javafx.collections.ObservableList;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -30,4 +33,10 @@ public class DataSource {
         }
         return instance;
     }
+
+    public ObservableList<utilisateur> getAllUsers() {
+        return null;
+    }
+
+
 }

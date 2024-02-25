@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AjouterUtilisateurController">
+    <TextField fx:id="Nom" layoutX="436.0" layoutY="139.0" prefHeight="26.0" prefWidth="241.0" />
+    <TextField fx:id="Prenom" layoutX="437.0" layoutY="184.0" prefHeight="26.0" prefWidth="242.0" />
+    <TextField fx:id="NumeroDeTelephone" layoutX="433.0" layoutY="286.0" prefHeight="26.0" prefWidth="249.0" />
+    <TextField fx:id="Email" layoutX="433.0" layoutY="339.0" prefHeight="26.0" prefWidth="250.0" />
+    <TextField fx:id="MotDePasse" layoutX="433.0" layoutY="389.0" prefHeight="26.0" prefWidth="250.0" />
+    <Label alignment="TOP_CENTER" layoutX="267.0" layoutY="75.0" prefHeight="36.0" prefWidth="347.0" text="Sign in" textAlignment="CENTER" textFill="#325b69" wrapText="true">
+      <font>
+         <Font name="System Bold" size="25.0" />
+      </font></Label>
+   <Text fill="#325b69" layoutX="274.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom:">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Text>
+   <Text fill="#325b69" layoutX="274.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prenom:">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Text>
+   <Text fill="#325b69" layoutX="273.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numero De Telephone:" textAlignment="RIGHT">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Text>
+   <Text fill="#325b69" layoutX="273.0" layoutY="358.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email:" textAlignment="RIGHT">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Text>
+   <Text fill="#325b69" layoutX="273.0" layoutY="408.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mot De Passe:">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Text>
+   <ChoiceBox fx:id="userRole" layoutX="436.0" layoutY="231.0" prefHeight="26.0" prefWidth="242.0">
+      <items>
+         <FXCollections fx:factory="observableArrayList">
+            <!-- No fx:value here -->
+         </FXCollections>
+      </items>
+   </ChoiceBox>
+
+
+   <Text fill="#325b69" layoutX="276.0" layoutY="251.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Role:" textAlignment="RIGHT">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Text>
+   <AnchorPane prefHeight="600.0" prefWidth="200.0" style="-fx-background-color: #325b69;">
+      <children>
+         <Button layoutY="144.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="200.0" style="-fx-background-color: #325b69;" text="Utilisateur" textFill="#fa8101">
+            <font>
+               <Font size="24.0" />
+            </font>
+         </Button>
+         <Button layoutX="-3.0" layoutY="204.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="200.0" style="-fx-background-color: #325b69;" text="Centre" textFill="#fa8101">
+            <font>
+               <Font size="24.0" />
+            </font>
+         </Button>
+         <Button layoutX="-1.0" layoutY="357.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="210.0" style="-fx-background-color: #325b69;" text="Equipement" textFill="#fa8101">
+            <font>
+               <Font size="24.0" />
+            </font>
+         </Button>
+         <Button layoutX="-1.0" layoutY="306.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="210.0" style="-fx-background-color: #325b69;" text="Transport" textFill="#fa8101">
+            <font>
+               <Font size="24.0" />
+            </font>
+         </Button>
+         <Button layoutY="255.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="210.0" style="-fx-background-color: #325b69;" text="Emplacement" textFill="#fa8101">
+            <font>
+               <Font size="24.0" />
+            </font>
+         </Button>
+      </children>
+   </AnchorPane>
+   <AnchorPane layoutX="200.0" prefHeight="54.0" prefWidth="600.0" style="-fx-background-color: #325b69;" />
+   <Button fx:id="ajouterUser" layoutX="500.0" layoutY="464.0" mnemonicParsing="false" onAction="#GoToLogin" style="-fx-background-color: #fa8101;" text="Ajouter" textFill="WHITE">
+      <font>
+         <Font size="17.0" />
+      </font>
+   </Button>
+   <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@logoCampigo.png" />
+      </image>
+   </ImageView>
+</AnchorPane>

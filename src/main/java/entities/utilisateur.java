@@ -1,6 +1,6 @@
 package entities;
 
-public class utilisateur {
+public  class utilisateur {
     private int id;
     private String nom;
     private String prenom;
@@ -9,10 +9,7 @@ public class utilisateur {
     private String email;
     private String motDePasse;
 
-    public utilisateur() {
-    }
-
-    public utilisateur(int id, String nom, String prenom, UserRole role, int numeroDeTelephone, String email, String motDePasse) {
+    public utilisateur( int id,String text, String prenomFieldText, int i, String emailFieldText, String motDePasseFieldText, UserRole role) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -21,6 +18,25 @@ public class utilisateur {
         this.email = email;
         this.motDePasse = motDePasse;
     }
+
+    public utilisateur(String nom, String prenom, UserRole role, int numeroDeTelephone, String email, String motDePasse) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.role = role;
+        this.numeroDeTelephone = numeroDeTelephone;
+        this.email = email;
+        this.motDePasse = motDePasse;
+    }
+
+    public utilisateur(int id) {
+        this.id = id;
+    }
+
+    public utilisateur() {
+
+    }
+
+
 
     @Override
     public String toString() {
@@ -64,11 +80,9 @@ public class utilisateur {
     }
 
     public void setRole(UserRole role) {
-        if (isValidRole(role)) {
-            this.role = role;
-        } else {
-            throw new IllegalArgumentException("Role invalide");
-        }
+
+        this.role = role;
+
     }
 
     private boolean isValidRole(UserRole role) {
@@ -94,4 +108,9 @@ public class utilisateur {
     public void setMotDePasse(String motDePasse) {
         this.motDePasse = motDePasse;
     }
+
+    public String getMotDePasse() {
+        return motDePasse;
+    }
 }
+
