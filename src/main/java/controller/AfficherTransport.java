@@ -60,6 +60,8 @@ public class AfficherTransport {
     private TableColumn<?, ?> colnum_v;
     @FXML
     private TableView<Transport> tableview;
+    @FXML
+    private TextField rechercheParnum_ch;
     private final TransportService TransportService =new TransportService();
 
 
@@ -73,6 +75,11 @@ public class AfficherTransport {
         colnum_v.setCellValueFactory(new PropertyValueFactory<>("num_v"));
         colcout.setCellValueFactory(new PropertyValueFactory<>("cout"));
 
+        rechercheParnum_ch.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.trim().isEmpty()) {
+                recherchertransport(Integer.parseInt(newValue.trim()));
+            }else { loadTansport();}
+        });
         // Charge les données dans le TableView à partir du service
         loadTansport();
     }
@@ -81,6 +88,13 @@ public class AfficherTransport {
         List<Transport> transports=TransportService.readAll();
         ObservableList<Transport> observableList = FXCollections.observableArrayList(transports);
         tableview.setItems(observableList);
+    }
+
+    private void recherchertransport(int num_ch) {
+        TransportService t = new TransportService();
+        List<Transport> resultatRecherche = t.rechercheParnum_ch(num_ch);
+        ObservableList<Transport> listeResultat = FXCollections.observableArrayList(resultatRecherche);
+        tableview .setItems(listeResultat);
     }
     @FXML
     public void supprimertransport(ActionEvent actionEvent) {

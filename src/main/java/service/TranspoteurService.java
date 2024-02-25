@@ -1,5 +1,6 @@
 package service;
 
+import entites.Transport;
 import entites.Transpoteur;
 import utils.DataSource;
 import java.time.LocalDate;
@@ -11,6 +12,7 @@ public class TranspoteurService implements itService<Transpoteur> {
     private Connection conn;
     private Statement ste;
     private PreparedStatement psr;
+    private ResultSet rs;
 
     public TranspoteurService() {
         conn= DataSource.getInstance().getCnx();
@@ -140,7 +142,38 @@ public class TranspoteurService implements itService<Transpoteur> {
 
     @Override
     public Transpoteur readBynum_ch(int num_ch) {
+        String query = "SELECT * FROM transpoteur WHERE num_ch=?";
+        try {
+            psr = conn.prepareStatement(query);
+
+            psr.setInt(1, num_ch);
+            rs = psr.executeQuery();
+            if (rs.next()) {
+                Transpoteur tr= new Transpoteur(
+                        rs.getInt("num_ch"),
+                        rs.getString("nom"),
+                        rs.getString("prenom"),
+                        rs.getInt("numtel"),
+                        rs.getString("email"),
+                        rs.getDate("Daten").toLocalDate(),
+                        rs.getInt("num_t")
+                );
+                return tr;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erreur lors de la lecture du transport par num_ch", e);
+        } finally {
+            closeResources();
+        }
         return null;
     }
 
+    private void closeResources() {
+        try {
+            if (rs != null) rs.close();
+            if (psr != null) psr.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

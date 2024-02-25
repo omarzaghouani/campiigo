@@ -27,20 +27,22 @@ public class Main {
 
         };
         //ps.add(t);
-        // ps.addpst(t1);
-         //ps.delete(t);
+
+        // ps.delete(t);
       // ps.update(t);
-        //  ps.readAll().forEach(System.out::println);
+        /* int num_chToSearch = 78; // Example num_ch to search for
+              Transport rechercherParNumCh = ps.rechercherParNumCh(num_chToSearch);*/
+         ps.readAll().forEach(System.out::println);
 
 
-        Transpoteur t2=new Transpoteur(28,"omar","zaghouani", 26834008, "omar.zaghouani@esprit.tn", LocalDate.of(2024,9,6)
+        Transpoteur t2=new Transpoteur(58,"omar","zaghouani", 26834008, "omar.zaghouani@esprit.tn", LocalDate.of(2024,9,6)
                 ,88);
 TranspoteurService psr= new TranspoteurService(){
 };
-  // psr.addt(t2);
+   //psr.addt(t2);
     //psr.deletet(t2);
      //  psr.updatet(t2);
-    //psr.readAll().forEach(System.out::println);
+    psr.readAll().forEach(System.out::println);
 
         Vehicule v=new Vehicule(122,"van familiale",7, 150, 148);
        VehiculeService psv= new VehiculeService(){
@@ -49,8 +51,8 @@ TranspoteurService psr= new TranspoteurService(){
 
 //psv.add(v);
        // psv.delete(v);
-       psv.update(v);
-      psv.readAll().forEach(System.out::println);
+    //   psv.update(v);
+      //psv.readAll().forEach(System.out::println);
 
 
     }

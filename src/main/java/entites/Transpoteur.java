@@ -74,9 +74,9 @@ public class Transpoteur {
         this.daten = daten;
     }*/
 
-    public Transpoteur(LocalDate daten) {
+    /*public Transpoteur(LocalDate daten) {
         this.daten = daten;
-    }
+    }*/
 
     public LocalDate getDaten() {
         return daten;

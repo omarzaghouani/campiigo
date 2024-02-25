@@ -4,7 +4,7 @@ import entites.Vehicule;
 import java.util.List;
 public interface VeService<T> {
 
-    void add(Vehicule v);
+    boolean add(Vehicule v);
     void delete(Vehicule vehicule);
     void update(Vehicule vehicule);
     List<Vehicule> readAll();

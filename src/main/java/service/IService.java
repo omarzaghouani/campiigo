@@ -15,6 +15,9 @@ public interface IService <T>{
     List<Transport> readAll();
 
     T readBynum_ch(int num_ch);
+   // Transport rechercherParNumCh(int num_ch);
 
     void selectvandtranspoteur(int num_ch);
+
+
 }

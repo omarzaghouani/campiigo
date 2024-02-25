@@ -2,6 +2,9 @@ package controller;
 
 import entites.Transport;
 
+import entites.Vehicule;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,12 +17,23 @@ import javafx.scene.control.TextField;
 
 import javafx.stage.Stage;
 import service.TransportService;
+import service.VehiculeService;
+import utils.DataSource;
+import entites.Vehicule;
 
+import java.net.URL;
+import java.sql.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.ResourceBundle;
 
 public class Ajoutertransport {
+    @FXML
+    private ChoiceBox<Integer> idvehicule;
     @FXML
     public Button button_ajouter;
     @FXML
@@ -47,6 +61,11 @@ public class Ajoutertransport {
     @FXML
     private TextField num_v;
 
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        VehiculeService num_v= new VehiculeService();
+
+        populatenum_vComboBox();
+    }
     @FXML
     void GoToAfficher(ActionEvent event) {
         try {
@@ -197,12 +216,6 @@ public class Ajoutertransport {
             System.out.println("Le champ de texte est vide.");
         }*/
 
-   /* private int num_t;
-    private int num_ch;
-    private int dd;
-    private int df;
-    private int num_v;
-    private int cout;*/
 
 
     @FXML
@@ -212,6 +225,26 @@ public class Ajoutertransport {
         System.out.println("Number entered: " + num_ch);
         // Now you can use 'num_ch' as an integer value
     }
+
+
+    public void populatenum_vComboBox() {
+
+        VehiculeService v = new VehiculeService();
+        List<Vehicule> vehicules = null;
+
+        vehicules = v.readAll();
+
+        ObservableList<Integer> num_v = FXCollections.observableArrayList();
+
+        for (Vehicule num : vehicules) {
+            num_v.add(num.getNum_v());
+            System.out.println("error");
+
+        }
+
+       idvehicule .setItems(num_v);
+    }
+
     @FXML
     void Ajoutertransport(ActionEvent event) {
         boolean message ;
@@ -219,12 +252,15 @@ public class Ajoutertransport {
             int num_c = Integer.parseInt(num_ch.getText());
             LocalDate dd = ddId.getValue();
             LocalDate da = daId.getValue();
-
-
-
             int num_ve = Integer.parseInt(num_v.getText());
             int coutt = Integer.parseInt(cout.getText());
-
+            /*Integer selectvehiculeid =idvehicule.getValue();
+            if(selectvehiculeid ==null){
+                System.out.println("error:no vehicule selected");
+                return;
+            }
+            VehiculeService vs=new VehiculeService();
+            Vehicule selectvehicule=vs.readBynum_v(selectvehiculeid);*/
             Transport t = new Transport(num_c, dd, da, num_ve, coutt);
             TransportService ps = new TransportService();
            message = ps.add(t);
@@ -270,10 +306,9 @@ public class Ajoutertransport {
         daId.setValue(null);
         num_v.clear();
         cout.clear();
-    }
+    }}
 
 
 
 /*Image image=new Image("D:`/xampp/htdocs/connexioncapmping3a16/lm.png");
-   ImageView ImageView= new ImageView((Image) image);*/
-}
+   ImageView Im*/

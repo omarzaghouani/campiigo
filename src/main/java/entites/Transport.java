@@ -3,14 +3,15 @@ package entites;
 import java.time.LocalDate;
 
 public class Transport {
-    public String getNum_t;
+
     private int num_t;
     private int num_ch;
     //transpoteur transpoteur;
     private LocalDate dd;
     private LocalDate da;
     private int num_v;
-   // vehicule vehicule;
+    // private vehicule vehicule;
+    private Vehicule vehiculeId;
     private int cout;
 
     public Transport() {

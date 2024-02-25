@@ -13,6 +13,7 @@ public class VehiculeService implements VeService<Vehicule> {
     private Statement ste;
     private PreparedStatement pst;
     private DataSource MyConnection;
+    private ResultSet rs;
 
     public VehiculeService() {
         conn= DataSource.getInstance().getCnx();
@@ -31,7 +32,11 @@ public class VehiculeService implements VeService<Vehicule> {
     }*/
 
 
-    public void add(Vehicule v) {
+    public boolean add(Vehicule v) {
+        if (v.getCapacite() > 15) {
+            System.out.println("La capacité du véhicule doit être inferieur à 15.");
+            return false; // Sortir de la méthode si la capacité n'est pas égale à 11
+        }
         String query = "INSERT INTO vehicule (num_v,type, capacite, prixuni, num_ch) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement psv = conn.prepareStatement(query)) {
 
@@ -53,6 +58,7 @@ public class VehiculeService implements VeService<Vehicule> {
             e.printStackTrace(); // Handle the exception properly in your application
             throw new RuntimeException(e); // If you prefer to throw a RuntimeException
         }
+        return true ;
     }
 
 
@@ -77,6 +83,10 @@ public class VehiculeService implements VeService<Vehicule> {
 
     @Override
     public void update(Vehicule vehicule) {
+        if (vehicule.getCapacite() != 11) {
+            System.out.println("La capacité du véhicule doit être égale à 11.");
+            return; // Sortir de la méthode si la capacité n'est pas égale à 11
+        }
         String query = "UPDATE vehicule SET num_ch= ?, type = ?, capacite = ?, prixuni = ? WHERE num_v = ?";
         try (PreparedStatement psv = conn.prepareStatement(query)) {
             psv.setInt(1, vehicule.getNum_ch());
@@ -125,21 +135,50 @@ public class VehiculeService implements VeService<Vehicule> {
 
     @Override
     public Vehicule readBynum_v(int num_v) {
+        String query = "SELECT * FROM vehicule WHERE num_v=?";
+        try {
+            pst = conn.prepareStatement(query);
+
+            pst.setInt(1, num_v);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                Vehicule v= new Vehicule(
+                        rs.getInt("num_v"),
+                        rs.getString("type"),
+                        rs.getInt("capacite"),
+                        rs.getInt("prixuni"),
+                        rs.getInt("num_ch")
+                );
+                return v;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erreur lors de la lecture du transport par num_ch", e);
+        } finally {
+            closeResources();
+        }
         return null;
+    }
+    private void closeResources() {
+        try {
+            if (rs != null) rs.close();
+            if (pst != null) pst.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 
 
-        // Your existing class code here...
+    // Your existing class code here...
 
         public float getsommevehicule() throws SQLException {
             Connection conn = MyConnection.getInstance().getConn();
             float prixuniTotal = 0.0F; // Use a float variable to accumulate the total price
 
-            PreparedStatement pst = conn.prepareStatement("SELECT prixuni FROM vehicule WHERE type = ?");
+            PreparedStatement psv = conn.prepareStatement("SELECT prixuni FROM vehicule WHERE type = ?");
             pst.setInt(1, this.type); // Use type, not num_v, as the filter
 
-            ResultSet rs = pst.executeQuery();
+            ResultSet rs = psv.executeQuery();
 
             while(rs.next()) {
                 prixuniTotal += rs.getFloat("prixuni"); // Retrieve price as float and add to total

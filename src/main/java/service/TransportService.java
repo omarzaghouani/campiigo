@@ -16,6 +16,7 @@ public class TransportService implements IService<Transport> {
     private PreparedStatement pst;
     private ResultSet rs;
 
+
     public TransportService() {
         conn= DataSource.getInstance().getCnx();
     }
@@ -111,7 +112,116 @@ public class TransportService implements IService<Transport> {
         }
     }
 
+    /*public List<Transport> rechercheParnum_ch(int num_ch) {
+        ResultSet resultSet = null;
+        List<Transport> transports = new ArrayList<>();
+        try {
+            String query = "SELECT * FROM transport WHERE num_ch = ?";
+            PreparedStatement pst = conn.prepareStatement(query);
+            pst.setInt(1, num_ch);
+            resultSet = pst.executeQuery();
 
+            while (resultSet.next()) {
+
+
+                Transport t = new Transport(num_ch,dd,da,num_v,cout);
+                t.setNum_ch(resultSet.getInt("num_ch")); // Using column name instead of index
+                t.setDd(resultSet.getDate("dd").toLocalDate()); // Assuming dd is of type Date in Transport
+                t.setDa(resultSet.getDate("da").toLocalDate()); // Assuming da is of type Date in Transport
+                t.setNum_v(resultSet.getInt("num_v")); // Assuming num_v is of type int in Transport
+                t.setCout(resultSet.getInt("cout")); // Assuming cout is of type int in Transport
+
+                transports.add(t);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (resultSet != null) resultSet.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return transports;
+    }*/
+
+    /*@Override
+    public List<Transport> readAll() {
+        List<Transport> List = new ArrayList<>();
+
+        String query = "SELECT * FROM vehicule JOIN transport ON vehicule.num_v = transport.num_v WHERE transport.num_ch = ?";
+        List<Transport> transportList = new ArrayList<>();
+
+        try (PreparedStatement pst = conn.prepareStatement(query)) {
+            pst.setInt(1,); // Set the value for the placeholder
+
+            try (ResultSet rs = pst.executeQuery()) {
+                while (rs.next()) {
+                    int num_t = rs.getInt("num_t");
+                    int num_ch = rs.getInt("num_ch");
+                    LocalDate dde = rs.getDate("dd").toLocalDate();
+                    LocalDate dae = rs.getDate("da").toLocalDate();
+                    int num_ve = rs.getInt("num_v");
+                    int coutt = rs.getInt("cout");
+                    int num_v = rs.getInt("num_v"); // Assuming "num_v" is the correct column name
+                    String type = rs.getString("type");
+                    int capacite = rs.getInt("capacite");
+                    int prixuni = rs.getInt("prixuni");
+
+                    // Create the corresponding vehicle object
+                    Vehicule vehicule = new Vehicule(num_ve, type, capacite, prixuni);
+
+                    // Create the Transport object
+                    Transport transport = new Transport(num_t, num_ch, dde, dae, coutt, vehicule);
+                    transportList.add(transport);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error executing SQL query", e);
+        }
+
+        return transportList;
+    }*/
+/*
+    @Override
+    public List<Transport> readAll() {
+        List<Transport> List = new ArrayList<>();
+
+        String query = "SELECT * FROM vehicule JOIN transport ON vehicule.num_v = transport.num_v WHERE transport.num_ch = ?";
+
+        try (PreparedStatement pst = conn.prepareStatement(query);
+             ResultSet rs = pst.executeQuery()) {
+
+            while (rs.next()) {
+                int num_t = rs.getInt("num_t");
+                int num_ch = rs.getInt("num_ch");
+                LocalDate dde= rs.getDate("dd ").toLocalDate();
+                LocalDate dae = rs.getDate("da").toLocalDate();
+                int num_ve= rs.getInt("num_v");
+                int coutt= rs.getInt("cout");
+                // Read voiture data excluding id_v
+                int num_v = rs.getInt("num_v");
+                String type = rs.getString("type");
+                int capacite= rs.getInt("capacite"); // Assuming "num_v" is the correct column name
+                int prixuni = rs.getInt("prixuni"); // Assuming "cout" is the correct column name
+                // Assuming you have columns named "dd" and "da", replace them with the correct column names
+                // int num_ch = rs.getInt("num_ch");
+
+                // Create the corresponding voiture object
+                Vehicule vehicule = new Vehicule(num_ch, dde, dae, num_ve, coutt);
+
+                // Create the Reservation_v object
+                Transport transport = new Transport(num_v,type, capacite,prixuni, vehicule);
+                List.add(transport);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return List;
+    }*/
 
     @Override
     public List<Transport> readAll() {
@@ -136,8 +246,40 @@ public class TransportService implements IService<Transport> {
             throw new RuntimeException(e); // If you prefer to throw a RuntimeException
         }
         return list;
+
     }
 
+    public List<Transport> rechercheParnum_ch(int num_ch) {
+        ResultSet resultSet = null;
+        List<Transport> transports = new ArrayList<>();
+        try {
+            String query = "SELECT * FROM transport WHERE num_ch = ?";
+            PreparedStatement pst = conn.prepareStatement(query);
+            pst.setInt(1, num_ch);
+            resultSet = pst.executeQuery();
+
+            while (resultSet.next()) {
+                Transport t = new Transport();
+                t.setNum_ch(resultSet.getInt("num_ch")); // Using column name instead of index
+                t.setDd(resultSet.getDate("dd").toLocalDate()); // Assuming dd is of type Date in Transport
+                t.setDa(resultSet.getDate("da").toLocalDate()); // Assuming da is of type Date in Transport
+                t.setNum_v(resultSet.getInt("num_v")); // Assuming num_v is of type int in Transport
+                t.setCout(resultSet.getInt("cout")); // Assuming cout is of type int in Transport
+
+                transports.add(t);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (resultSet != null) resultSet.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return transports;
+    }
 
     @Override
     public Transport readBynum_ch(int num_ch) {
@@ -164,6 +306,9 @@ public class TransportService implements IService<Transport> {
         }
         return null;
     }
+
+
+
 
     @Override
    public void selectvandtranspoteur(int num_ch) {

@@ -75,28 +75,55 @@ public class AjouterVehicule implements Initializable {
         num_ch.clear();
         prixuni.clear();
     }*/
+
     @FXML
-    public void AjouterVehicule(ActionEvent actionEvent) {
+    void AjouterVehicule(ActionEvent actionEvent) {
+        boolean message;
         try {
             int cpt = Integer.parseInt(capacite.getText());
             int num_ve = Integer.parseInt(num_v.getText());
             int prixunii = Integer.parseInt(prixuni.getText());
+            int num = Integer.parseInt(num_ch.getText());
+
             String selectedType = type.getValue();
-            int num=Integer.parseInt(num_ch.getText());
-            Vehicule v = new Vehicule(num_ve,selectedType,cpt,prixunii,num);
-            VehiculeService psv = new VehiculeService() {
-            };
-            psv.add(v);
+            if (selectedType == null || selectedType.isEmpty()) {
+                // Display an error message to the user indicating that the type must be selected
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur de saisie");
+                alert.setHeaderText(null);
+                alert.setContentText("Veuillez sélectionner un type de véhicule!");
+                alert.showAndWait();
+                return; // Exit the method without adding the vehicle
+            }
 
-            // Display success message to the user
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("vehicule ajouté");
-            alert.setHeaderText(null);
-            alert.setContentText("Le vehicule a été ajouté avec succès!");
-            alert.showAndWait();
+            Vehicule v = new Vehicule(num_ve, selectedType, cpt, prixunii, num);
+            VehiculeService psv = new VehiculeService();
+            message = psv.add(v);
 
-            // Clear input fields after adding transport
-            // clearFields();
+            if (!message ) {
+                // Display success message to the user
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("vehicule non ajouté");
+                alert.setHeaderText(null);
+                alert.setContentText("vehicule faild!");
+                alert.showAndWait();
+
+                // Clear input fields after adding transport
+
+            }
+            else {
+
+
+                // Display success message to the user
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("vehicule ajouté");
+                alert.setHeaderText(null);
+                alert.setContentText("vehicule a été ajouté avec succès!");
+                alert.showAndWait();
+
+                // Clear input fields after adding transport
+
+            }
 
         } catch (NumberFormatException e) {
             // Handle invalid input (e.g., non-numeric values)
@@ -106,90 +133,80 @@ public class AjouterVehicule implements Initializable {
             alert.setContentText("Veuillez saisir des valeurs numériques valides!");
             alert.showAndWait();
         }
-        String selectedType = type.getValue();
-        if (selectedType == null || selectedType.isEmpty()) {
-            // Display an error message to the user indicating that the type must be selected
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erreur de saisie");
-            alert.setHeaderText(null);
-            alert.setContentText("Veuillez sélectionner un type de véhicule!");
-            alert.showAndWait();
-            return; // Exit the method without adding the vehicle
-        }
-
     }
+
 
     @FXML
-    void GoTovehicule(ActionEvent event) {
-        try {
-            // Load the Event.fxml file
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterVehicule.fxml"));
-            javafx.scene.Parent root = loader.load();
+        void GoTovehicule (ActionEvent event){
+            try {
+                // Load the Event.fxml file
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterVehicule.fxml"));
+                javafx.scene.Parent root = loader.load();
 
-            // Show the AfficherUser.fxml scene
-            Stage stage = (Stage) buttonvehicule.getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
+                // Show the AfficherUser.fxml scene
+                Stage stage = (Stage) buttonvehicule.getScene().getWindow();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         }
 
-    }
+        @FXML
+        void GoToAdd (ActionEvent event){
+            try {
+                // Load the Event.fxml file
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("AjouterVehicule.fxml"));
+                javafx.scene.Parent root = loader.load();
 
-    @FXML
-    void GoToAdd(ActionEvent event) {
-        try {
-            // Load the Event.fxml file
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("AjouterVehicule.fxml"));
-            javafx.scene.Parent root = loader.load();
+                // Show the AfficherUser.fxml scene
+                Stage stage = (Stage) button_ajouter.getScene().getWindow();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-            // Show the AfficherUser.fxml scene
-            Stage stage = (Stage) button_ajouter.getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
 
-    }
+        @FXML
+        void GoToUpdate (ActionEvent event){
+            try {
+                // Load the Event.fxml file
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Updatevehicule.fxml"));
+                javafx.scene.Parent root = loader.load();
 
-    @FXML
-    void GoToUpdate(ActionEvent event) {
-        try {
-            // Load the Event.fxml file
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Updatevehicule.fxml"));
-            javafx.scene.Parent root = loader.load();
+                // Show the AfficherUser.fxml scene
+                Stage stage = (Stage) button_modifier.getScene().getWindow();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-            // Show the AfficherUser.fxml scene
-            Stage stage = (Stage) button_modifier.getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
 
-    }
+        @FXML
+        void GoTotranspoteur (ActionEvent event){
+            try {
+                // Load the Event.fxml file
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/ajoutertranspoteur.fxml"));
+                javafx.scene.Parent root = loader.load();
 
-    @FXML
-    void GoTotranspoteur(ActionEvent event) {
-        try {
-            // Load the Event.fxml file
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ajoutertranspoteur.fxml"));
-            javafx.scene.Parent root = loader.load();
+                // Show the AfficherUser.fxml scene
+                Stage stage = (Stage) buttontranspoteur.getScene().getWindow();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-            // Show the AfficherUser.fxml scene
-            Stage stage = (Stage) buttontranspoteur.getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-
-    }
 
     @FXML
     void GoToAfficher(ActionEvent event) {
