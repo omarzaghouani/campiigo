@@ -12,21 +12,21 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="437.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Updatetransport">
+<AnchorPane prefHeight="553.0" prefWidth="732.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Updatetransport">
    <children>
-      <AnchorPane prefHeight="437.0" prefWidth="114.0" style="-fx-background-color: #325B69;">
+      <AnchorPane prefHeight="553.0" prefWidth="132.0" style="-fx-background-color: #325B69;">
          <children>
             <Button fx:id="buttontransport" layoutX="-5.0" layoutY="114.0" mnemonicParsing="false" onAction="#GoTotransport" prefHeight="73.0" prefWidth="122.0" style="-fx-background-color: #325B69;" text="transport" textFill="#fcc03e">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button fx:id="buttontranspoteur" layoutX="-3.0" layoutY="190.0" mnemonicParsing="false" onAction="#GoTotranspoteur" prefHeight="82.0" prefWidth="134.0" style="-fx-background-color: #325B69;" text="transpoteur" textFill="#fcc03e">
+            <Button fx:id="buttontranspoteur" layoutX="-3.0" layoutY="212.0" mnemonicParsing="false" onAction="#GoTotranspoteur" prefHeight="82.0" prefWidth="134.0" style="-fx-background-color: #325B69;" text="transpoteur" textFill="#fcc03e">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button fx:id="buttonvehicule" layoutX="-2.0" layoutY="273.0" mnemonicParsing="false" onAction="#GoTovehicule" prefHeight="90.0" prefWidth="122.0" style="-fx-background-color: #325B69;" text="vehicule" textFill="#fcc03e">
+            <Button fx:id="buttonvehicule" layoutX="-2.0" layoutY="325.0" mnemonicParsing="false" onAction="#GoTovehicule" prefHeight="90.0" prefWidth="122.0" style="-fx-background-color: #325B69;" text="vehicule" textFill="#fcc03e">
                <font>
                   <Font size="20.0" />
                </font>
@@ -37,19 +37,19 @@
             <Image url="@../../../image/lm.png" />
          </image>
       </ImageView>
-      <AnchorPane layoutX="129.0" prefHeight="74.0" prefWidth="513.0" style="-fx-background-color: #325B69;">
+      <AnchorPane layoutX="129.0" prefHeight="74.0" prefWidth="609.0" style="-fx-background-color: #325B69;">
          <children>
             <Button fx:id="buttonajouter" layoutX="12.0" layoutY="2.0" mnemonicParsing="false" onAction="#GoToAdd" prefHeight="66.0" prefWidth="110.0" style="-fx-background-color: #325B69;" text="Ajouter" textFill="#fcc03e">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button fx:id="buttonmodifier" layoutX="155.0" layoutY="-1.0" mnemonicParsing="false" onAction="#GoToUpdate" prefHeight="73.0" prefWidth="128.0" style="-fx-background-color: #325B69;" text="Modifier" textFill="#fcc03e">
+            <Button fx:id="buttonmodifier" layoutX="190.0" layoutY="-1.0" mnemonicParsing="false" onAction="#GoToUpdate" prefHeight="73.0" prefWidth="128.0" style="-fx-background-color: #325B69;" text="Modifier" textFill="#fcc03e">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button fx:id="buttonafficher" layoutX="315.0" layoutY="9.0" mnemonicParsing="false" onAction="#GoToAfficher" prefHeight="55.0" prefWidth="142.0" style="-fx-background-color: #325B69;" text="Afficher" textFill="#fcc03e">
+            <Button fx:id="buttonafficher" layoutX="366.0" layoutY="9.0" mnemonicParsing="false" onAction="#GoToAfficher" prefHeight="55.0" prefWidth="142.0" style="-fx-background-color: #325B69;" text="Afficher" textFill="#fcc03e">
                <font>
                   <Font size="20.0" />
                </font>
@@ -84,5 +84,10 @@
       </Button>
       <DatePicker fx:id="ddId" layoutX="205.0" layoutY="176.0" />
       <DatePicker fx:id="daId" layoutX="207.0" layoutY="237.0" />
+      <ImageView fitHeight="191.0" fitWidth="243.0" layoutX="470.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../image/depositphotos_46719109-stock-photo-update-icon.jpg" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

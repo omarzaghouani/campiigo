@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="595.0" prefWidth="788.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AfficherVehicule">
+<AnchorPane prefHeight="595.0" prefWidth="788.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AfficherVehicule">
    <children>
       <AnchorPane layoutY="-7.0" prefHeight="622.0" prefWidth="138.0" style="-fx-background-color: #325B69;">
          <children>
@@ -30,30 +34,33 @@
       </AnchorPane>
       <AnchorPane layoutX="137.0" prefHeight="90.0" prefWidth="651.0" style="-fx-background-color: #325B69;">
          <children>
-            <Button fx:id="button_ajouter" layoutX="40.0" layoutY="3.0" mnemonicParsing="false" onAction="#GoToAdd" prefHeight="78.0" prefWidth="138.0" style="-fx-background-color: #325B69;" text="ajouter" textFill="#fcc03e">
+            <Button fx:id="button_ajouter" layoutX="40.0" layoutY="3.0" mnemonicParsing="false" onAction="#GoToAdd" prefHeight="78.0" prefWidth="138.0" style="-fx-background-color: #325B69;" text="Ajouter" textFill="#fcc03e">
                <font>
                   <Font size="20.0" />
                </font></Button>
-            <Button fx:id="buttonmodifier" layoutX="221.0" layoutY="-1.0" mnemonicParsing="false" onAction="#GoToUpdate" prefHeight="90.0" prefWidth="138.0" style="-fx-background-color: #325B69;" text="modifier" textFill="#fcc03e">
+            <Button fx:id="buttonmodifier" layoutX="232.0" layoutY="-1.0" mnemonicParsing="false" onAction="#GoToUpdate" prefHeight="90.0" prefWidth="138.0" style="-fx-background-color: #325B69;" text="Modifier" textFill="#fcc03e">
                <font>
                   <Font size="20.0" />
                </font></Button>
-            <Button fx:id="buttonafficher" layoutX="369.0" layoutY="-1.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="122.0" style="-fx-background-color: #325B69;" text="affichier" textFill="#fcc03e">
+            <Button fx:id="buttonafficher" layoutX="436.0" layoutY="-1.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="122.0" style="-fx-background-color: #325B69;" text="Affichier" textFill="#fcc03e">
                <font>
                   <Font size="20.0" />
                </font></Button>
          </children>
       </AnchorPane>
-      <TableView fx:id="tableview" layoutX="185.0" layoutY="226.0" prefHeight="322.0" prefWidth="491.0">
+      <TableView fx:id="tableview" layoutX="185.0" layoutY="226.0" prefHeight="323.0" prefWidth="574.0" style="-fx-background-color: #fcc03e;">
         <columns>
-          <TableColumn fx:id="colnum_v" prefWidth="100.80006408691406" text="num_v" />
-          <TableColumn fx:id="coltype" prefWidth="81.5999755859375" text="type" />
-            <TableColumn fx:id="colcapacite" prefWidth="89.5999755859375" text="capacite" />
-            <TableColumn fx:id="colprixuni" prefWidth="86.4000244140625" text="prixuni" />
-            <TableColumn fx:id="colnum_ch" prefWidth="133.5999755859375" text="num_ch" />
+          <TableColumn fx:id="colnum_v" prefWidth="121.60005187988281" text="num_v" />
+          <TableColumn fx:id="coltype" prefWidth="96.0" text="type" />
+            <TableColumn fx:id="colcapacite" prefWidth="111.2000732421875" text="capacite" />
+            <TableColumn fx:id="colprixuni" prefWidth="107.199951171875" text="prixuni" />
+            <TableColumn fx:id="colnum_ch" prefWidth="139.2000732421875" text="num_ch" />
         </columns>
       </TableView>
-      <Button fx:id="button_supp" layoutX="563.0" layoutY="141.0" mnemonicParsing="false" onAction="#supprimervehicule" style="-fx-background-color: #325B69;" text="supp" />
-      <TextField fx:id="txtnum_ch_supp" layoutX="413.0" layoutY="141.0" />
+      <Button fx:id="button_supp" layoutX="668.0" layoutY="179.0" mnemonicParsing="false" onAction="#supprimervehicule" style="-fx-background-color: #325B69;" text="supp" textFill="#fcc03e">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+      <TextField fx:id="txtnum_ch_supp" layoutX="511.0" layoutY="186.0" />
    </children>
 </AnchorPane>

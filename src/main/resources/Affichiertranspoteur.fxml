@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="504.0" prefWidth="811.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Affichertranspoteur">
+<AnchorPane prefHeight="540.0" prefWidth="843.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Affichertranspoteur">
    <children>
-      <AnchorPane prefHeight="504.0" prefWidth="144.0" style="-fx-background-color: #325B69;">
+      <AnchorPane prefHeight="540.0" prefWidth="148.0" style="-fx-background-color: #325B69;">
          <children>
             <Button fx:id="buttontransport" layoutX="1.0" layoutY="122.0" mnemonicParsing="false" onAction="#GoTotransport" prefHeight="106.0" prefWidth="146.0" style="-fx-background-color: #325B69;" text="transport" textFill="#fcc03e">
                <font>
@@ -28,48 +28,48 @@
                   <Font size="20.0" />
                </font>
             </Button>
-            <ImageView fitHeight="124.0" fitWidth="146.0" layoutX="-3.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="124.0" fitWidth="146.0" layoutX="-1.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../image/lm.png" />
                </image>
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="145.0" prefHeight="82.0" prefWidth="666.0" style="-fx-background-color: #325B69;">
+      <AnchorPane layoutX="146.0" prefHeight="94.0" prefWidth="697.0" style="-fx-background-color: #325B69;">
          <children>
             <Button fx:id="button_ajouter" layoutX="24.0" layoutY="-3.0" mnemonicParsing="false" onAction="#GoToAdd" prefHeight="95.0" prefWidth="137.0" style="-fx-background-color: #325B69;" text="Ajouter" textFill="#fcc03e">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button fx:id="buttonmodifier" layoutX="196.0" layoutY="2.0" mnemonicParsing="false" onAction="#GoToUpdate" prefHeight="86.0" prefWidth="174.0" style="-fx-background-color: #325B69;" text="Modifier" textFill="#fcc03e">
+            <Button fx:id="buttonmodifier" layoutX="215.0" layoutY="2.0" mnemonicParsing="false" onAction="#GoToUpdate" prefHeight="86.0" prefWidth="174.0" style="-fx-background-color: #325B69;" text="Modifier" textFill="#fcc03e">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button fx:id="buttonafficher" layoutX="404.0" layoutY="2.0" mnemonicParsing="false" onAction="#GoToview" prefHeight="86.0" prefWidth="158.0" style="-fx-background-color: #325B69;" text="Affichier" textFill="#fcc03e">
+            <Button fx:id="buttonafficher" layoutX="427.0" layoutY="2.0" mnemonicParsing="false" onAction="#GoToview" prefHeight="86.0" prefWidth="158.0" style="-fx-background-color: #325B69;" text="Affichier" textFill="#fcc03e">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
          </children>
       </AnchorPane>
-      <TableView fx:id="tableview" layoutX="167.0" layoutY="154.0" prefHeight="258.0" prefWidth="572.0">
+      <TableView fx:id="tableview" layoutX="168.0" layoutY="162.0" prefHeight="339.0" prefWidth="655.0" style="-fx-background-color: #fcc03e;">
         <columns>
-          <TableColumn fx:id="colnum_ch" prefWidth="75.0" text="num_ch" />
-          <TableColumn fx:id="colnom" prefWidth="75.0" text="nom" />
-            <TableColumn fx:id="colprenom" prefWidth="75.0" text="prenom" />
-            <TableColumn fx:id="colnumtel" prefWidth="75.0" text="numtel" />
-            <TableColumn fx:id="colemail" prefWidth="75.0" text="email" />
-            <TableColumn fx:id="coldaten" prefWidth="75.0" text="daten" />
-            <TableColumn fx:id="colnum_t" prefWidth="120.0" text="num_t" />
+          <TableColumn fx:id="colnum_ch" prefWidth="87.20001220703125" text="num_ch" />
+          <TableColumn fx:id="colnom" prefWidth="63.19999694824219" text="nom" />
+            <TableColumn fx:id="colprenom" prefWidth="91.99993896484375" text="prenom" />
+            <TableColumn fx:id="colnumtel" prefWidth="108.0" text="numtel" />
+            <TableColumn fx:id="colemail" prefWidth="92.79998779296875" text="email" />
+            <TableColumn fx:id="coldaten" prefWidth="113.5999755859375" text="daten" />
+            <TableColumn fx:id="colnum_t" prefWidth="97.5999755859375" text="num_t" />
         </columns>
       </TableView>
-      <Button fx:id="button_supp" layoutX="667.0" layoutY="107.0" mnemonicParsing="false" onAction="#supprimertransport" style="-fx-background-color: #325B69;" text="supp" textFill="#fcc03e">
+      <Button fx:id="button_supp" layoutX="730.0" layoutY="110.0" mnemonicParsing="false" onAction="#supprimertransport" style="-fx-background-color: #325B69;" text="supp" textFill="#fcc03e">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <TextField fx:id="txtnum_ch_supp" layoutX="506.0" layoutY="122.0" />
+      <TextField fx:id="txtnum_ch_supp" layoutX="578.0" layoutY="121.0" />
    </children>
 </AnchorPane>

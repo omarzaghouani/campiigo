@@ -310,36 +310,24 @@ public class TransportService implements IService<Transport> {
 
 
 
-    @Override
-   public void selectvandtranspoteur(int num_ch) {
-    String query = "SELECT * FROM vehicule JOIN transport ON vehicule.num_v = transport.num_v WHERE transport.num_ch = ?";
-    try {
-        // Prepare the statement with the SQL query
-        PreparedStatement pst = conn.prepareStatement(query);
+    public void selectVehiclesForTransport(int num_ch) {
+        String query = "SELECT * FROM vehicule JOIN transport ON vehicule.num_v = transport.num_v WHERE transport.num_ch = ?";
 
-        // Set the value of num_ch in the WHERE clause
-        pst.setInt(1, num_ch);
-
-        // Execute the query and obtain the ResultSet
-   ResultSet rs = pst.executeQuery();
-
-        // Process the ResultSet
-        while (rs.next()) {
-            // Retrieve data from the ResultSet and utilize it as needed
-            int vehiculeId = rs.getInt("num_v");
-            // Retrieve other columns as needed
-
-            // Process the data or store it in appropriate data structures
+        try (PreparedStatement pst = conn.prepareStatement(query)) {
+            pst.setInt(1, num_ch);
+            try (ResultSet rs = pst.executeQuery()) {
+                // Process the ResultSet
+                while (rs.next()) {
+                    // Retrieve data from the ResultSet and utilize it as needed
+                    int vehiculeId = rs.getInt("num_v");
+                    // You can process or store this information as needed
+                    System.out.println("Vehicle ID associated with transport " + num_ch + ": " + vehiculeId);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Handle any SQL exceptions that may occur
         }
-
-        // Close the ResultSet and PreparedStatement
-        rs.close();
-        pst.close();
-    } catch (SQLException e) {
-        // Handle any SQL exceptions that may occur
-        e.printStackTrace(); // Or handle it according to your application's requirements
     }
-}
 
 
     private void closeResources() {

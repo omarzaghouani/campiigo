@@ -4,6 +4,8 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -16,7 +18,7 @@
 <AnchorPane prefHeight="506.0" prefWidth="701.0" style="-fx-background-color: #C6CED1;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Ajoutertransport">
 
    <children>
-      <Button layoutX="530.0" layoutY="454.0" mnemonicParsing="false" onAction="#Ajoutertransport" prefHeight="41.0" prefWidth="88.0" style="-fx-background-color: #3A3A3C;" text="ajouter">
+      <Button layoutX="491.0" layoutY="408.0" mnemonicParsing="false" onAction="#Ajoutertransport" prefHeight="41.0" prefWidth="88.0" style="-fx-background-color: #3A3A3C;" text="ajouter">
          <font>
             <Font size="19.0" />
          </font>
@@ -61,7 +63,7 @@
             <Font name="System Italic" size="13.0" />
          </font></Label>
       <TextField fx:id="cout" layoutX="231.0" layoutY="344.0" />
-      <AnchorPane layoutX="174.0" layoutY="-3.0" prefHeight="58.0" prefWidth="549.0" style="-fx-background-color: #325B69;">
+      <AnchorPane layoutX="174.0" layoutY="-3.0" prefHeight="59.0" prefWidth="722.0" style="-fx-background-color: #325B69;">
          <children>
             <Button fx:id="button_ajouter" layoutY="-1.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="117.0" style="-fx-background-color: #325B69;" text="Ajouter" textFill="#fcc03e">
                <font>
@@ -82,7 +84,7 @@
       </AnchorPane>
       <DatePicker fx:id="ddId" layoutX="230.0" layoutY="162.0" />
       <DatePicker fx:id="daId" layoutX="232.0" layoutY="224.0" />
-      <AnchorPane layoutY="-1.0" prefHeight="506.0" prefWidth="175.0" style="-fx-background-color: #325B69;">
+      <AnchorPane layoutY="-1.0" prefHeight="828.0" prefWidth="175.0" style="-fx-background-color: #325B69;">
          <children>
             <ImageView fitHeight="147.0" fitWidth="175.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -104,8 +106,25 @@
                   <Font size="20.0" />
                </font>
             </Button>
+
          </children>
       </AnchorPane>
-      <ChoiceBox fx:id="idvehicule" layoutX="225.0" layoutY="395.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="idvehicule" layoutX="225.0" layoutY="416.0" prefWidth="150.0" />
+      <TableView fx:id="vehiculeTableView" layoutX="217.0" layoutY="511.0" prefHeight="200.0" prefWidth="573.0">
+         <columns>
+            <TableColumn fx:id="colnum_v" prefWidth="75.0" text="num_v" />
+            <TableColumn fx:id="coltype" prefWidth="75.0" text="type" />
+            <TableColumn fx:id="colcapacite" prefWidth="75.0" text="capacite" />
+            <TableColumn fx:id="colnum_ch" prefWidth="75.0" text="num_ch" />
+            <TableColumn fx:id="colnum_t" prefWidth="75.0" text="num_t" />
+            <TableColumn fx:id="lnum_ch" prefWidth="59.20001220703125" text="num_ch" />
+            <TableColumn fx:id="coldd" prefWidth="91.20001220703125" text="dd" />
+            <TableColumn fx:id="colda" prefWidth="48.80010986328125" text="da" />
+            <TableColumn fx:id="lnum_v" minWidth="0.0" prefWidth="98.400146484375" text="num_v" />
+            <TableColumn fx:id="coutcout" prefWidth="81.599853515625" text="cout" />
+         </columns>
+      </TableView>
+      <Label layoutX="237.0" layoutY="393.0" text="list chauffeur" textFill="#0930f4" />
+      <Label layoutX="239.0" layoutY="483.0" text="list vehiculebel" textFill="#130fc7" />
    </children>
 </AnchorPane>

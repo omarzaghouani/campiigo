@@ -9,19 +9,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AjouterVehicule">
+<AnchorPane prefHeight="489.0" prefWidth="770.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AjouterVehicule">
    <children>
-      <AnchorPane prefHeight="400.0" prefWidth="102.0" style="-fx-background-color: #325B69;">
+      <AnchorPane prefHeight="489.0" prefWidth="134.0" style="-fx-background-color: #325B69;">
          <children>
-            <Button fx:id="buttontransport" layoutY="96.0" mnemonicParsing="false" onAction="#GoTotransport" prefHeight="80.0" prefWidth="127.0" style="-fx-background-color: #325B69;" text="transport" textFill="#fcc03e">
+            <Button fx:id="buttontransport" layoutX="1.0" layoutY="148.0" mnemonicParsing="false" onAction="#GoTotransport" prefHeight="80.0" prefWidth="127.0" style="-fx-background-color: #325B69;" text="transport" textFill="#fcc03e">
                <font>
                   <Font size="20.0" />
                </font></Button>
-            <Button fx:id="buttontranspoteur" layoutX="-1.0" layoutY="161.0" mnemonicParsing="false" onAction="#GoTotranspoteur" prefHeight="100.0" prefWidth="135.0" style="-fx-background-color: #325B69;" text="transpoteur" textFill="#fcc03e">
+            <Button fx:id="buttontranspoteur" layoutY="217.0" mnemonicParsing="false" onAction="#GoTotranspoteur" prefHeight="100.0" prefWidth="135.0" style="-fx-background-color: #325B69;" text="transpoteur" textFill="#fcc03e">
                <font>
                   <Font size="20.0" />
                </font></Button>
-            <Button fx:id="buttonvehicule" layoutY="249.0" mnemonicParsing="false" onAction="#GoTovehicule" prefHeight="72.0" prefWidth="134.0" style="-fx-background-color: #325B69;" text="vehicule" textFill="#fcc03e">
+            <Button fx:id="buttonvehicule" layoutY="341.0" mnemonicParsing="false" onAction="#GoTovehicule" prefHeight="72.0" prefWidth="134.0" style="-fx-background-color: #325B69;" text="vehicule" textFill="#fcc03e">
                <font>
                   <Font size="20.0" />
                </font></Button>
@@ -32,7 +32,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="134.0" prefHeight="60.0" prefWidth="467.0" style="-fx-background-color: #325B69;">
+      <AnchorPane layoutX="134.0" prefHeight="60.0" prefWidth="636.0" style="-fx-background-color: #325B69;">
          <children>
             <Button fx:id="button_ajouter" layoutX="2.0" layoutY="-1.0" mnemonicParsing="false" onAction="#GoToAdd" prefHeight="60.0" prefWidth="127.0" style="-fx-background-color: #325B69;" text="Ajouter" textFill="#fcc03e">
                <font>
@@ -48,19 +48,24 @@
                </font></Button>
          </children>
       </AnchorPane>
-      <Button layoutX="475.0" layoutY="328.0" mnemonicParsing="false" onAction="#AjouterVehicule" style="-fx-background-color: #325B69;" text="ajouter" textFill="#fcc03e">
+      <Button layoutX="562.0" layoutY="397.0" mnemonicParsing="false" onAction="#AjouterVehicule" style="-fx-background-color: #325B69;" text="ajouter" textFill="#fcc03e">
          <font>
             <Font size="20.0" />
          </font></Button>
-      <TextField fx:id="num_v" layoutX="204.0" layoutY="111.0" />
-      <TextField fx:id="capacite" layoutX="198.0" layoutY="220.0" />
-      <TextField fx:id="prixuni" layoutX="193.0" layoutY="270.0" />
-      <TextField fx:id="num_ch" layoutX="189.0" layoutY="322.0" />
-      <Label layoutX="216.0" layoutY="86.0" text="numero vehicule" />
-      <ChoiceBox fx:id="type" layoutX="204.0" layoutY="164.0" prefWidth="150.0" />
-      <Label layoutX="212.0" layoutY="141.0" text="type" />
-      <Label layoutX="203.0" layoutY="196.0" text="capacite" />
-      <Label layoutX="199.0" layoutY="250.0" text="prixuni" />
-      <Label layoutX="200.0" layoutY="300.0" text="num_ch" />
+      <TextField fx:id="num_v" layoutX="194.0" layoutY="128.0" />
+      <TextField fx:id="capacite" layoutX="192.0" layoutY="242.0" />
+      <TextField fx:id="prixuni" layoutX="192.0" layoutY="300.0" />
+      <TextField fx:id="num_ch" layoutX="193.0" layoutY="359.0" />
+      <Label layoutX="195.0" layoutY="107.0" text="numero vehicule" textFill="#325b69" />
+      <ChoiceBox fx:id="type" layoutX="194.0" layoutY="181.0" prefWidth="150.0" />
+      <Label layoutX="204.0" layoutY="154.0" text="type" textFill="#325b69" />
+      <Label layoutX="201.0" layoutY="215.0" text="capacite" textFill="#325b69" />
+      <Label layoutX="198.0" layoutY="273.0" text="prixuni" textFill="#325b69" />
+      <Label layoutX="193.0" layoutY="334.0" text="num_ch" textFill="#325b69" />
+      <ImageView fitHeight="153.0" fitWidth="300.0" layoutX="412.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../image/tras.jpg" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

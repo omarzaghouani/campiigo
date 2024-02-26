@@ -8,27 +8,20 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-
-
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.TextField;
-
+import javafx.scene.control.TableColumn;
 import javafx.stage.Stage;
 import service.TransportService;
 import service.VehiculeService;
-import utils.DataSource;
-import entites.Vehicule;
-
+import java.util.List;
 import java.net.URL;
-import java.sql.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class Ajoutertransport {
@@ -60,12 +53,127 @@ public class Ajoutertransport {
 
     @FXML
     private TextField num_v;
+    @FXML
+    private TableView<Transport> tableview;
+    @FXML
+    private TableColumn<?, ?> colcapacite;
+
+    @FXML
+    private TableColumn<?, ?> colda;
+
+    @FXML
+    private TableColumn<?, ?> coldd;
+
+    @FXML
+    private TableColumn<?, ?> colnum_ch;
+
+    @FXML
+    private TableColumn<?, ?> colnum_t;
+
+    @FXML
+    private TableColumn<?, ?> colnum_v;
+
+    @FXML
+    private TableColumn<?, ?> coltype;
+
+
+
+    @FXML
+    private TableColumn<?, ?> coutcout;
+
+    @FXML
+    private TableView<Integer> vehiculeTableView;
+
+    private final TransportService transportService = new TransportService();
+    private final VehiculeService vehiculeService = new VehiculeService();
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        VehiculeService num_v= new VehiculeService();
+         VehiculeService num_v= new VehiculeService();
+    populateVehiculeTableView(vehiculeTableView);
+    populateVehiculeTableView(vehiculeTableView);
+        initTableColumns();
+        loadTransport();
+        populateVehiculeTableView(vehiculeTableView);
 
-        populatenum_vComboBox();
     }
+
+    private void initTableColumns() {
+        // Transport table columns
+        colnum_ch.setCellValueFactory(new PropertyValueFactory<>("num_ch"));
+        colda.setCellValueFactory(new PropertyValueFactory<>("da"));
+        coldd.setCellValueFactory(new PropertyValueFactory<>("dd"));
+        colnum_v.setCellValueFactory(new PropertyValueFactory<>("num_v"));
+        coutcout.setCellValueFactory(new PropertyValueFactory<>("cout"));
+
+        // Vehicule table columns
+        colcapacite.setCellValueFactory(new PropertyValueFactory<>("capacite"));
+        colda.setCellValueFactory(new PropertyValueFactory<>("da"));
+        coldd.setCellValueFactory(new PropertyValueFactory<>("dd"));
+        colnum_ch.setCellValueFactory(new PropertyValueFactory<>("num_ch"));
+        colnum_t.setCellValueFactory(new PropertyValueFactory<>("num_t"));
+        colnum_v.setCellValueFactory(new PropertyValueFactory<>("num_v"));
+        coltype.setCellValueFactory(new PropertyValueFactory<>("type"));
+        coutcout.setCellValueFactory(new PropertyValueFactory<>("cout"));
+    }
+
+
+    private void loadTransport() {
+        /*VehiculeService vehiculeService = new VehiculeService();
+        List<Vehicule>  vehicules = vehiculeService.readAll();
+        ObservableList<Vehicule> observableList = FXCollections.observableArrayList();
+        tableview.setItems(observableList);*/
+        List<Transport> transports = transportService.readAll();
+        ObservableList<Transport> transportList = FXCollections.observableArrayList(transports);
+        tableview.setItems(transportList);
+    }
+    public void populateVehiculeTableView(TableView<Integer> tableview) {
+        VehiculeService vehiculelist = new VehiculeService();
+        List<Vehicule> vehicules = vehiculelist.readAll();
+        ObservableList<Integer> num_v = FXCollections.observableArrayList();
+
+        for (Vehicule num : vehicules) {
+            num_v.add(num.getNum_v());
+            System.out.println("Added vehicle ID: " + num.getNum_v());
+
+            vehiculeTableView.setItems(num_v);
+
+        /*colcapacite.setCellValueFactory(new PropertyValueFactory<>("capacite"));
+        colda.setCellValueFactory(new PropertyValueFactory<>("da"));
+        coldd.setCellValueFactory(new PropertyValueFactory<>("dd"));
+        colnum_ch.setCellValueFactory(new PropertyValueFactory<>("num_ch"));
+        colnum_t.setCellValueFactory(new PropertyValueFactory<>("num_t"));
+        colnum_v.setCellValueFactory(new PropertyValueFactory<>("num_v"));
+        coltype.setCellValueFactory(new PropertyValueFactory<>("type"));
+        coutcout.setCellValueFactory(new PropertyValueFactory<>("cout"));
+
+        vehiculeTableView.getItems().clear();
+        vehiculeTableView.getItems().addAll(vehicules);*/
+
+        }
+
+    /*public void populatenum_vComboBox() {
+
+        VehiculeService v = new VehiculeService();
+        List<Vehicule> vehicules = null;
+
+        vehicules = v.readAll();
+        // Print the size of vehicules list for debugging
+        System.out.println("Number of vehicles retrieved: " + vehicules.size());
+
+        ObservableList<Integer> num_v = FXCollections.observableArrayList();
+
+        for (Vehicule num : vehicules) {
+            num_v.add(num.getNum_v());
+            System.out.println("Added vehicle ID: " + num.getNum_v());
+
+        }
+
+       idvehicule .setItems(num_v);
+    }
+*/
+    }
+
+
     @FXML
     void GoToAfficher(ActionEvent event) {
         try {
@@ -227,23 +335,6 @@ public class Ajoutertransport {
     }
 
 
-    public void populatenum_vComboBox() {
-
-        VehiculeService v = new VehiculeService();
-        List<Vehicule> vehicules = null;
-
-        vehicules = v.readAll();
-
-        ObservableList<Integer> num_v = FXCollections.observableArrayList();
-
-        for (Vehicule num : vehicules) {
-            num_v.add(num.getNum_v());
-            System.out.println("error");
-
-        }
-
-       idvehicule .setItems(num_v);
-    }
 
     @FXML
     void Ajoutertransport(ActionEvent event) {
