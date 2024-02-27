@@ -1,0 +1,7 @@
+<root>
+    <item name='java.sql.ResultSet int getInt(java.lang.String)'>
+        <annotation name='org.jetbrains.annotations.Contract'>
+            <val name="pure" val="true"/>
+        </annotation>
+    </item>
+</root>
