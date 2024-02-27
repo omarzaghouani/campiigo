@@ -9,7 +9,7 @@ public  class utilisateur {
     private String email;
     private String motDePasse;
 
-    public utilisateur( int id,String text, String prenomFieldText, int i, String emailFieldText, String motDePasseFieldText, UserRole role) {
+    public utilisateur( int id,String nom, String prenom, String email, String motDePasse, UserRole role, int numeroDeTelephone) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -36,7 +36,15 @@ public  class utilisateur {
 
     }
 
-
+    public utilisateur(int id, String nom, String prenom, UserRole role, int numeroDeTelephone, String email, String motDePasse) {
+        this.id = id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.role = role;
+        this.numeroDeTelephone = numeroDeTelephone;
+        this.email = email;
+        this.motDePasse = motDePasse;
+    }
 
     @Override
     public String toString() {

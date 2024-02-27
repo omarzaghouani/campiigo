@@ -48,7 +48,7 @@ public class LoginController {
 
     private void redirectToCampOwnerInterface(ActionEvent actionEvent) throws IOException {
         // Code to redirect to the camp owner interface (e.g., load a new FXML)
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterUser.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Home.fxml"));
         Parent adminParent = loader.load();
         Scene adminScene = new Scene(adminParent);
 

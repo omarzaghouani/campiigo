@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AfficherUtilisateurController">
+<AnchorPane fx:id="" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AfficherUtilisateurController">
    <children>
       <AnchorPane layoutX="252.0" layoutY="-1.0" prefHeight="54.0" prefWidth="578.0" style="-fx-background-color: #325B69;">
          <children>
-            <ImageView fitHeight="51.0" fitWidth="74.0" layoutX="505.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="logout" fitHeight="51.0" fitWidth="74.0" layoutX="505.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@Logout.png" />
                </image>
@@ -24,7 +19,7 @@
                   <Image url="@Admin.png" />
                </image>
             </ImageView>
-            <Text fill="#cf780f" layoutX="89.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin" wrappingWidth="93.33673095703125">
+            <Text fill="#fa8101" layoutX="89.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin" wrappingWidth="93.33673095703125">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
@@ -81,7 +76,7 @@
             <Font size="17.0" />
          </font>
       </Button>
-      <Button fx:id="SupprimerButton" layoutX="694.0" layoutY="529.0" mnemonicParsing="false" onAction="#GoToModifierU" style="-fx-background-color: #fa8101;" text="Supprimer" textFill="WHITE">
+      <Button fx:id="SupprimerButton" layoutX="694.0" layoutY="529.0" mnemonicParsing="false" onAction="#SupprimerU" style="-fx-background-color: #fa8101;" text="Supprimer" textFill="WHITE">
          <font>
             <Font size="17.0" />
          </font>

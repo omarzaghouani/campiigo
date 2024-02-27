@@ -50,6 +50,19 @@
             <artifactId>logback-classic</artifactId>
             <version>1.2.6</version>
         </dependency>
+
+        <!-- JavaFX Graphics -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-graphics</artifactId>
+            <version>17.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>13.0</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -59,13 +72,14 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.11.0</version>
                 <configuration>
-                    <source>1.8</source> <!-- ou la version de votre JDK -->
-                    <target>1.8</target> <!-- ou la version de votre JDK -->
+                    <source>17</source> <!-- Utiliser la version 17 de votre JDK -->
+                    <target>17</target> <!-- Utiliser la version 17 de votre JDK -->
                     <compilerArgs>
                         <arg>-Xlint:unchecked</arg>
                     </compilerArgs>
                 </configuration>
             </plugin>
+
             <!-- JavaFX Maven Plugin -->
             <plugin>
                 <groupId>org.openjfx</groupId>
@@ -77,7 +91,6 @@
             </plugin>
 
             <!-- Maven Deploy Plugin -->
-
         </plugins>
     </build>
 </project>

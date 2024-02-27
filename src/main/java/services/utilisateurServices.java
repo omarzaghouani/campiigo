@@ -9,39 +9,100 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class utilisateurServices implements Iservices<utilisateur> {
-    private static Connection conn;
+    public static Connection conn;
 
 
-    public  utilisateurServices() {
+    public utilisateurServices() {
         conn = DataSource.getInstance().getCnx();
+        if (conn == null) {
+            System.out.println("Connection is null!");
+        } else {
+            System.out.println("Connection is valid.");
+        }
     }
-
     public static utilisateur getUtilisateurById(int userId) {
-        String req = "SELECT * FROM utilisateur WHERE id=?";
+        Connection conn = null;
         utilisateur user = null;
 
-        try (PreparedStatement preparedStatement = conn.prepareStatement(req)) {
-            preparedStatement.setInt(1, userId);
+        // Assuming 'req' is your SQL query, replace it with your actual query
+        String req = "SELECT * FROM utilisateur WHERE id = ?";
 
-            try (ResultSet rs = preparedStatement.executeQuery()) {
-                if (rs.next()) {
-                    user = new utilisateur(
-                            rs.getInt("id"),
-                            rs.getString("nom"),
-                            rs.getString("prenom"),
-                            rs.getInt("NumeroDeTelephone"),
-                            rs.getString("Email"),
-                            rs.getString("MotDePasse"),
-                            UserRole.valueOf(rs.getString("Role"))
-                    );
+        try {
+            // Establish a database connection (replace the connection details accordingly)
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/campigo", "root", "");
+
+            // Check if the connection is valid and not closed
+            if (conn != null && !conn.isClosed()) {
+                try (PreparedStatement preparedStatement = conn.prepareStatement(req)) {
+                    preparedStatement.setInt(1, userId);
+
+                    try (ResultSet rs = preparedStatement.executeQuery()) {
+                        if (rs.next()) {
+                            user = mapResultSetToUtilisateur(rs);
+                        }
+                    }
                 }
+            } else {
+                // Throw a more detailed exception message if the connection is not established
+                throw new SQLException("La connexion à la base de données n'est pas établie. Vérifiez la configuration de la connexion.");
             }
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            // Catch SQL exceptions and throw a more informative runtime exception
+            throw new RuntimeException("Erreur lors de la récupération de l'utilisateur par ID. Détails : " + ex.getMessage(), ex);
+        } finally {
+            // Close the connection in a finally block to ensure it's always closed
+            try {
+                if (conn != null && !conn.isClosed()) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                // Handle any exception that might occur while closing the connection
+                ex.printStackTrace(); // You can replace this with your logging mechanism
+            }
         }
 
         return user;
+
     }
+
+
+    private static utilisateur mapResultSetToUtilisateur(ResultSet rs) throws SQLException {
+        return new utilisateur(
+                rs.getInt("id"),
+                rs.getString("nom"),
+                rs.getString("prenom"),
+                rs.getString("Email"),
+                rs.getString("MotDePasse"),
+                UserRole.valueOf(rs.getString("Role")),
+                rs.getInt("NumeroDeTelephone")
+        );
+    }
+
+
+    public static boolean estUtilisateurUnique(int id, String nouveauEmail) {
+        conn = DataSource.getInstance().getCnx();
+
+        if (conn == null) {
+            throw new IllegalStateException("Connection is null. Please initialize it before using this method.");
+        }
+
+        String query = "SELECT id FROM utilisateur WHERE id <> ? AND Email = ?";
+        try (PreparedStatement statement = conn.prepareStatement(query)) {
+            statement.setInt(1, id);
+            statement.setString(2, nouveauEmail);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                return resultSet.next();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static void initialize() {
+    }
+
 
     @Override
     public void ajouter(utilisateur utilisateur) throws SQLException {
@@ -70,25 +131,18 @@ public class utilisateurServices implements Iservices<utilisateur> {
 
     @Override
     public void modifier(utilisateur utilisateur) throws SQLException {
-        String sql = "UPDATE utilisateur SET " +
-                "nom=?, " +
-                "prenom=?, " +
-                "Role=?, " +
-                "NumeroDeTelephone=?, " +
-                "Email=?, " +
-                "MotDePasse=? " +
-                "WHERE id=?";
-
+        String sql = "UPDATE `utilisateur` SET `Nom`=?,`Prenom`=?,`role`=?,`NumeroDeTelephone`=?,`Email`=?,`MotDePasse`=? WHERE `id`=?";
         try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
             preparedStatement.setString(1, utilisateur.getNom());
             preparedStatement.setString(2, utilisateur.getPrenom());
-            preparedStatement.setObject(3, utilisateur.getRole());
+            preparedStatement.setString(3, utilisateur.getRole().toString());
             preparedStatement.setInt(4, utilisateur.getNumeroDeTelephone());
             preparedStatement.setString(5, utilisateur.getEmail());
             preparedStatement.setString(6, utilisateur.getMotDePasse());
             preparedStatement.setInt(7, utilisateur.getId());
-
             preparedStatement.executeUpdate();
+        }catch(SQLException err){
+            System.out.println(err.getMessage());
         }
     }
 
@@ -112,14 +166,14 @@ public class utilisateurServices implements Iservices<utilisateur> {
 
             while (rs.next()) {
                 utilisateur user = new utilisateur(
-                        rs.getInt("id"),
-                        rs.getString("nom"),
-                        rs.getString("prenom"),
-                        rs.getInt("NumeroDeTelephone"),
+                                        rs.getInt("id"),
+                                        rs.getString("nom"),
+                                        rs.getString("prenom"),
                         rs.getString("Email"),
                         rs.getString("MotDePasse"),
-                        UserRole.valueOf(rs.getString("Role"))
-                );
+                        UserRole.valueOf(rs.getString("Role")),
+                        rs.getInt("NumeroDeTelephone")
+                                );
 
                 utilisateurs.add(user);
             }

@@ -18,6 +18,8 @@ import services.utilisateurServices;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class AjouterUtilisateurController {
     @FXML
@@ -59,7 +61,12 @@ public class AjouterUtilisateurController {
         });
 
         // Add items to the ChoiceBox
-        userRole.setItems(FXCollections.observableArrayList(UserRole.values()));
+        userRole.setItems(FXCollections.observableArrayList(
+                Arrays.stream(UserRole.values())
+                        .filter(role -> role != entities.UserRole.Admin &&  role != entities.UserRole.role  )
+                        .collect(Collectors.toList())
+        )
+        );
     }
 
 

@@ -2,10 +2,17 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class HomeController {
 
@@ -23,6 +30,8 @@ public class HomeController {
 
     @FXML
     private Text text2;
+    @FXML
+    private Button SignUp;
 
     @FXML
     private void initialize() {
@@ -78,6 +87,20 @@ public class HomeController {
     public void handleaboutusEntered(ActionEvent actionEvent) {
     }
 
+   
 
+    public void GoSignup(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterUser.fxml"));
+            Parent root = loader.load();
+            ;
+            Stage stage = (Stage) SignUp.getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
 

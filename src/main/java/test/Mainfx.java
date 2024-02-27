@@ -1,38 +1,45 @@
 package test;
 
+import controller.AfficherUtilisateurController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import services.utilisateurServices;
+import utils.DataSource;
 
 import java.io.IOException;
+import java.sql.Connection;
 
 public class Mainfx extends Application {
+    public static void main(String[] args) {
+        // Initialize utilisateurServices before launching the JavaFX application
+        utilisateurServices.initialize();
+
+        launch(args);
+    }
 
     @Override
     public void start(Stage primaryStage) {
         try {
-            // Load the FXML file from the resources/Main directory
+            // Initialize the connection to the database from DataSource
+            Connection connexion = DataSource.getInstance().getCnx();
+
+            // Create an instance of AfficherUtilisateurController passing the connection
+            AfficherUtilisateurController controller = new AfficherUtilisateurController(connexion);
+
+            // Load the FXML file using the controller you just created
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherUser.fxml"));
             Parent root = loader.load();
 
-            // Set up the stage
-            primaryStage.setTitle("afficher Utilisateur");
-            primaryStage.setScene(new Scene(root, 800, 600));
+            Scene scene = new Scene(root);
 
-            // Show the stage
+            primaryStage.setTitle("Votre Application");
+            primaryStage.setScene(scene);
             primaryStage.show();
-
-            // Hack to access the protected field in Lighting
-
-
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }
