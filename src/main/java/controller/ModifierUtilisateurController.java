@@ -26,7 +26,7 @@ public class ModifierUtilisateurController {
     private TextField Email;
 
     @FXML
-    private TextField MotDePasse;
+    private PasswordField MotDePasse;
 
     @FXML
     private TextField Nom;

@@ -28,10 +28,7 @@ public class LoginController {
     private Button loginButton;
 
     // Méthode pour gérer l'action du bouton de connexion
-    @FXML
-    private void loginButtonAction(ActionEvent event) throws IOException {
 
-    }
 
     private void redirectToAdminInterface(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherUser.fxml"));
@@ -48,7 +45,7 @@ public class LoginController {
 
     private void redirectToCampOwnerInterface(ActionEvent actionEvent) throws IOException {
         // Code to redirect to the camp owner interface (e.g., load a new FXML)
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Home.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/HomeClient.fxml"));
         Parent adminParent = loader.load();
         Scene adminScene = new Scene(adminParent);
 
@@ -61,7 +58,7 @@ public class LoginController {
     }
 
     private void redirectToSimpleUserInterface(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterUser.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/HomeClient.fxml"));
         Parent adminParent = loader.load();
         Scene adminScene = new Scene(adminParent);
 
@@ -77,11 +74,14 @@ public class LoginController {
 
 
 
+    @FXML
     public void GoToInterface(ActionEvent event) throws IOException {
         utilisateurServices us = new utilisateurServices();
         utilisateur user = us.authentifier(emailTextField.getText(), passwordTextField.getText());
 
         if (user != null && user.getRole() != null) {
+            // Créer une session avec l'utilisateur authentifié
+            Session.getInstance();
             switch (user.getRole()) {
                 case Admin:
                     // Redirect to the admin interface

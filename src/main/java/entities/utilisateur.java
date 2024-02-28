@@ -2,11 +2,11 @@ package entities;
 
 public  class utilisateur {
     private int id;
-    private String nom;
-    private String prenom;
-    private UserRole role;
+    private static String nom;
+    private static String prenom;
+    private static UserRole role;
     private int numeroDeTelephone;
-    private String email;
+    private static String email;
     private String motDePasse;
 
     public utilisateur( int id,String nom, String prenom, String email, String motDePasse, UserRole role, int numeroDeTelephone) {
@@ -67,7 +67,7 @@ public  class utilisateur {
         this.id = id;
     }
 
-    public String getNom() {
+    public static String getNom() {
         return nom;
     }
 
@@ -75,7 +75,7 @@ public  class utilisateur {
         this.nom = nom;
     }
 
-    public String getPrenom() {
+    public static String getPrenom() {
         return prenom;
     }
 
@@ -83,7 +83,7 @@ public  class utilisateur {
         this.prenom = prenom;
     }
 
-    public UserRole getRole() {
+    public static UserRole getRole() {
         return role;
     }
 
@@ -105,7 +105,7 @@ public  class utilisateur {
         this.numeroDeTelephone = numeroDeTelephone;
     }
 
-    public String getEmail() {
+    public static String getEmail() {
         return email;
     }
 

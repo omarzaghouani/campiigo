@@ -67,12 +67,22 @@
             <Font name="System Bold Italic" size="20.0" />
          </font>
       </Text>
-      <Button fx:id="SignUp" layoutX="396.0" layoutY="406.0" mnemonicParsing="false" onAction="#GoSignup" style="-fx-background-color: #ff711a;" text="SIGN UP FREE">
+      <Button fx:id="SignUp" layoutX="501.0" layoutY="406.0" mnemonicParsing="false" onAction="#GoSignup" style="-fx-background-color: #ff711a;" text="SIGN UP FREE">
          <font>
             <Font size="17.0" />
          </font>
       </Button>
-      <ImageView fitHeight="44.0" fitWidth="39.0" layoutX="536.0" layoutY="422.0" pickOnBounds="true" preserveRatio="true" rotate="-65.3">
+      <ImageView fitHeight="44.0" fitWidth="39.0" layoutX="641.0" layoutY="429.0" pickOnBounds="true" preserveRatio="true" rotate="-65.3">
+         <image>
+            <Image url="@icone (1).png" />
+         </image>
+      </ImageView>
+      <Button fx:id="LogIn" layoutX="307.0" layoutY="406.0" mnemonicParsing="false" onAction="#GoToLogIn" prefHeight="38.0" prefWidth="134.0" style="-fx-background-color: #ff711a;" text="LOGIN IN FREE">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="44.0" fitWidth="39.0" layoutX="251.0" layoutY="421.0" pickOnBounds="true" preserveRatio="true" rotate="56.7">
          <image>
             <Image url="@icone (1).png" />
          </image>
