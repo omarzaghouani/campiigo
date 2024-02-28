@@ -1,5 +1,7 @@
 package controller;
 
+import entities.ImageSingleton;
+import entities.Session;
 import entities.utilisateur;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +15,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-
 public class HomeClientController {
     @FXML
     public Button profileButton;
@@ -24,7 +25,7 @@ public class HomeClientController {
 
     public void initialize() {
         // Initialisation de l'ImageView  ici si nécessaire
-        utilisateur user = Session.getInstance().getUser();
+        utilisateur utilisateur = Session.getInstance().getUser();
 
         logout.setOnMouseClicked(this::logoutAction);
         profileButton.setOnAction(event -> GoToProfile());

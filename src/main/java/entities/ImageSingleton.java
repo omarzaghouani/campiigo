@@ -1,4 +1,4 @@
-package controller;
+package entities;
 
 import javafx.scene.image.Image;
 public class ImageSingleton {

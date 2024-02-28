@@ -1,6 +1,4 @@
-package controller;
-
-import entities.utilisateur;
+package entities;
 
 public class Session {
     private static Session instance;

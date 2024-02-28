@@ -28,7 +28,10 @@ import java.util.logging.Logger;
 
 public class AfficherUtilisateurController implements Initializable {
         public ImageView logout;
-        private Connection connexion;
+    public Button centre_button;
+    public Button activite_button;
+    public Button button_transport;
+    private Connection connexion;
         private Statement stm;
 
         public AfficherUtilisateurController() {
@@ -77,6 +80,48 @@ public class AfficherUtilisateurController implements Initializable {
         public <connection> AfficherUtilisateurController(connection connexion) {
                 this.connexion = DataSource.getInstance().getCnx();
         }
+    @FXML
+    void GoToTransport(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/transport.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) button_transport.getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    void GoToActivite(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ajouteractivite.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) activite_button.getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    void GoToCentre(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ajouter.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) centre_button.getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
         // Bouton Ajouter
         @FXML

@@ -1,6 +1,7 @@
 package controller;
-
+import entities.ImageSingleton;
 import com.github.sarxos.webcam.Webcam;
+import entities.Session;
 import entities.utilisateur;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
@@ -101,10 +102,11 @@ public class ProfileController implements Initializable {
         return fxImage;
     }
 
-    public void EditProfile(ActionEvent actionEvent) {
+    public void EditProfile(ActionEvent actionEvent) throws IOException {
         // Implémenter la logique pour modifier le profil
 
     }
+
 
     public void logoutAction(MouseEvent event) {
 
@@ -132,9 +134,20 @@ public class ProfileController implements Initializable {
             profileImageView.setImage(capturedImage);
 
     }
-    public void returnToHomeC(ActionEvent actionEvent) {
+    public void returnToHomeC(ActionEvent actionEvent) throws IOException {
         // Implémenter la logique pour modifier le profil
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/HomeClient.fxml"));
+        Parent root = loader.load();
 
+        // Obtenir la scène actuelle
+        Stage stage = (Stage) homeClient.getScene().getWindow();
+
+        // Créer une nouvelle scène avec le fichier FXML chargé
+        Scene profileScene = new Scene(root);
+
+        // Définir la nouvelle scène sur le stage
+        stage.setScene(profileScene);
+        stage.show();
 
     }
 
