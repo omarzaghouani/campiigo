@@ -220,10 +220,10 @@ public class Affichertranspoteur {
         ObservableList<String> sortCriteria = FXCollections.observableArrayList("num_ch", "nom", "email");
         sortCriteriaChoiceBox.setItems(sortCriteria);
 
-        // Sélectionne par défaut le premier critère
+
         sortCriteriaChoiceBox.getSelectionModel().selectFirst();
 
-        // Écouteur pour détecter les changements de sélection
+
         sortCriteriaChoiceBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 if (newValue.equals("num_ch")) {
@@ -236,18 +236,18 @@ public class Affichertranspoteur {
             }
         });
 
-        // Initialise les colonnes du TableView et charge les données
+
         initializet();
     }
 
-    // Méthode de tri par ID
+
     private void sortByNom() {
         ObservableList<Transpoteur> transpoteurs= tableview.getItems();
         transpoteurs.sort(Comparator.comparing(Transpoteur::getNom));
         tableview.setItems(transpoteurs);
     }
 
-    // Méthode de tri par nom de centre
+
     private void sortByMail() {
         ObservableList<Transpoteur> transpoteurs = tableview.getItems();
 
@@ -255,7 +255,6 @@ public class Affichertranspoteur {
         tableview.setItems(transpoteurs);
     }
 
-    // Méthode de tri par ville
     private void sortByNum() {
         ObservableList<Transpoteur> transpoteurs = tableview.getItems();
         transpoteurs.sort(Comparator.comparing(Transpoteur::getNum_ch));

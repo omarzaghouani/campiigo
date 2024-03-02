@@ -72,7 +72,7 @@ public class AfficherTransport {
 
 
     public void initialize() {
-        // Initialise les colonnes du TableView
+
 
         colnum_t.setCellValueFactory(new PropertyValueFactory<>("num_t"));
         colnum_ch.setCellValueFactory(new PropertyValueFactory<>("num_ch"));
