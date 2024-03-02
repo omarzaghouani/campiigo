@@ -86,7 +86,7 @@ public class AfficherTransport {
                 recherchertransport(Integer.parseInt(newValue.trim()));
             }else { loadTansport();}
         });
-        // Charge les données dans le TableView à partir du service
+
         loadTansport();
 
     }
@@ -116,18 +116,18 @@ public class AfficherTransport {
                 System.out.println("Le transport avec num_ch" + num_ch + " n'existe pas.");
             }
         } catch (NumberFormatException e) {
-            // Gérer l'exception si la conversion en nombre échoue
+
             e.printStackTrace();
         }
     }
     @FXML
     void GoToUpdate(ActionEvent event) {
         try {
-            // Load the Event.fxml file
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Updatetransport.fxml"));
             javafx.scene.Parent root = loader.load();
 
-            // Show the AfficherUser.fxml scene
+
             Stage stage = (Stage) buttonmodifier.getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
@@ -173,11 +173,11 @@ public class AfficherTransport {
     @FXML
     void GoToAdd(ActionEvent event) {
         try {
-            // Load the Event.fxml file
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/transport.fxml"));
             javafx.scene.Parent root = loader.load();
 
-            // Show the AfficherUser.fxml scene
+
             Stage stage = (Stage) button_ajouter.getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
@@ -196,7 +196,7 @@ public class AfficherTransport {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/transport.fxml"));
                 javafx.scene.Parent root = loader.load();
 
-                // Show the AfficherUser.fxml scene
+
                 Stage stage = (Stage) buttontransport.getScene().getWindow();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
@@ -216,7 +216,6 @@ public class AfficherTransport {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/ajoutertranspoteur.fxml"));
             javafx.scene.Parent root = loader.load();
 
-            // Show the AfficherUser.fxml scene
             Stage stage = (Stage) buttontranspoteur.getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
@@ -232,11 +231,11 @@ public class AfficherTransport {
     @FXML
     void GoTovehicule(ActionEvent event) {
         try {
-            // Load the Event.fxml file
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterVehicule.fxml"));
             javafx.scene.Parent root = loader.load();
 
-            // Show the AfficherUser.fxml scene
+
             Stage stage = (Stage) buttonvehicule.getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
@@ -251,29 +250,29 @@ public class AfficherTransport {
     private String generateCaptcha(int length) {
         StringBuilder captcha = new StringBuilder();
         Random random = new Random();
-        // Caractères possibles pour le captcha
+
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         for (int i = 0; i < length; i++) {
-            // Sélection aléatoire d'un caractère dans la chaîne de caractères
+
             captcha.append(characters.charAt(random.nextInt(characters.length())));
         }
         return captcha.toString();
     }
 
-    // Méthode pour initialiser et afficher le captcha
+
     public void initializet() {
-        // Générer un captcha de 5 caractères
+
         String captchaText = generateCaptcha(5);
-        // Afficher le captcha dans le label
+
         captchaLabel.setText(captchaText);
     }
 
-    // Méthode pour vérifier si le captcha saisi correspond au captcha affiché
+
     @FXML
     void verifyCaptcha() {
-        // Récupérer le captcha saisi par l'utilisateur
+
         String enteredCaptcha = captchaTextField.getText();
-        // Récupérer le captcha affiché
+
         String displayedCaptcha = captchaLabel.getText();
 
         // Vérifier si le captcha saisi correspond au captcha affiché
