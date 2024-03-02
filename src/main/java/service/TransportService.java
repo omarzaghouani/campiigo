@@ -316,11 +316,11 @@ public class TransportService implements IService<Transport> {
         try (PreparedStatement pst = conn.prepareStatement(query)) {
             pst.setInt(1, num_ch);
             try (ResultSet rs = pst.executeQuery()) {
-                // Process the ResultSet
+
                 while (rs.next()) {
-                    // Retrieve data from the ResultSet and utilize it as needed
+
                     int vehiculeId = rs.getInt("num_v");
-                    // You can process or store this information as needed
+
                     System.out.println("Vehicle ID associated with transport " + num_ch + ": " + vehiculeId);
                 }
             }
@@ -329,6 +329,26 @@ public class TransportService implements IService<Transport> {
         }
     }
 
+    public void selecttranspoteurtransport(int num_ch) {
+        String query = "SELECT * FROM transpoteur JOIN transport ON transpoteur.num_ch = transport.num_ch WHERE transport.num_ch=?";
+
+        try (PreparedStatement pst = conn.prepareStatement(query)) {
+            pst.setInt(1, num_ch);
+
+            try (ResultSet rs = pst.executeQuery()) {
+
+                while (rs.next()) {
+
+                    int tarnspoteurId = rs.getInt("num_ch");
+String nom=rs.getString("nom");
+                    System.out.println("transpoteur ID associated with transport " + num_ch + ": " + tarnspoteurId);
+                    System.out.println("transpoteur ID associated with transport " + nom + ": " + nom);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Handle any SQL exceptions that may occur
+        }
+    }
 
     private void closeResources() {
         try {

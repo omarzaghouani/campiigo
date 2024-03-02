@@ -1,32 +1,27 @@
 package controller;
+
 import entites.Transport;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import service.TransportService;
-import utils.DataSource;
-import java.io.IOException;
-import java.net.URL;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.List;
-import java.util.ResourceBundle;
-import javafx.scene.control.TextField;
-import javafx.scene.control.DatePicker;
-import java.time.LocalDate;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Random;
 public class AfficherTransport {
+
+    @FXML
+    private Label captchaLabel;
+
+    @FXML
+    private Button button_stripe;
     @FXML
     private Button buttontransport;
 
@@ -35,11 +30,20 @@ public class AfficherTransport {
 
     @FXML
     private Button buttonvehicule;
+    @FXML
+    private TextField captchaTextField;
+    @FXML
+    private Button captcha_button;
+    @FXML
 
     public TextField txtnum_ch_supp;
+    @FXML
     public Button button_supp;
+    @FXML
     public Button button_ajouter;
+    @FXML
     public Button buttonmodifier;
+    @FXML
     public Button buttonafficher;
     @FXML
     private TableColumn<?, ?> colcout;
@@ -62,6 +66,8 @@ public class AfficherTransport {
     private TableView<Transport> tableview;
     @FXML
     private TextField rechercheParnum_ch;
+    @FXML
+    private Button button_stat;
     private final TransportService TransportService =new TransportService();
 
 
@@ -82,7 +88,9 @@ public class AfficherTransport {
         });
         // Charge les données dans le TableView à partir du service
         loadTansport();
+
     }
+
 
     private void loadTansport() {
         List<Transport> transports=TransportService.readAll();
@@ -121,6 +129,39 @@ public class AfficherTransport {
 
             // Show the AfficherUser.fxml scene
             Stage stage = (Stage) buttonmodifier.getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+    @FXML
+    void statransport(ActionEvent event) {
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/statran.fxml"));
+            javafx.scene.Parent root = loader.load();
+
+
+            Stage stage = (Stage) button_stat.getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    void stripetransport(ActionEvent event) {
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/stripe.fxml"));
+            javafx.scene.Parent root = loader.load();
+
+
+            Stage stage = (Stage) button_stripe.getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
@@ -207,6 +248,41 @@ public class AfficherTransport {
 
 
     }
+    private String generateCaptcha(int length) {
+        StringBuilder captcha = new StringBuilder();
+        Random random = new Random();
+        // Caractères possibles pour le captcha
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        for (int i = 0; i < length; i++) {
+            // Sélection aléatoire d'un caractère dans la chaîne de caractères
+            captcha.append(characters.charAt(random.nextInt(characters.length())));
+        }
+        return captcha.toString();
+    }
 
+    // Méthode pour initialiser et afficher le captcha
+    public void initializet() {
+        // Générer un captcha de 5 caractères
+        String captchaText = generateCaptcha(5);
+        // Afficher le captcha dans le label
+        captchaLabel.setText(captchaText);
+    }
 
+    // Méthode pour vérifier si le captcha saisi correspond au captcha affiché
+    @FXML
+    void verifyCaptcha() {
+        // Récupérer le captcha saisi par l'utilisateur
+        String enteredCaptcha = captchaTextField.getText();
+        // Récupérer le captcha affiché
+        String displayedCaptcha = captchaLabel.getText();
+
+        // Vérifier si le captcha saisi correspond au captcha affiché
+        if (enteredCaptcha.equals(displayedCaptcha)) {
+            System.out.println("Captcha correct !");
+            // Ajouter ici le code à exécuter si le captcha est correct
+        } else {
+            System.out.println("Captcha incorrect !");
+            // Ajouter ici le code à exécuter si le captcha est incorrect
+        }
+    }
 }

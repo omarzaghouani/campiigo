@@ -1,8 +1,6 @@
 package entites;
 
 //import java.sql.Date;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
 import utils.DataSource;
 //import MyConnection; // Import your MyConnection class
 

@@ -1,26 +1,23 @@
 package controller;
 
 import entites.Transpoteur;
-import entites.Vehicule;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import service.TranspoteurService;
-import service.VehiculeService;
-import javafx.scene.control.TableColumn;
 
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 public class Affichertranspoteur {
 
+    public ChoiceBox sortCriteriaChoiceBox;
     @FXML
     private Button button_ajouter;
 
@@ -70,7 +67,7 @@ public class Affichertranspoteur {
     private TextField txtnum_ch_supp;
     private final TranspoteurService TranspoteurService=new TranspoteurService() ;
 
-    public void initialize() {
+    public void initializet() {
         // Initialise les colonnes du TableView
 
         colnum_ch.setCellValueFactory(new PropertyValueFactory<>("num_ch"));
@@ -215,6 +212,54 @@ public class Affichertranspoteur {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    public void  initialize() {
+        // Initialise le ChoiceBox avec les critères de tri
+        ObservableList<String> sortCriteria = FXCollections.observableArrayList("num_ch", "nom", "email");
+        sortCriteriaChoiceBox.setItems(sortCriteria);
+
+        // Sélectionne par défaut le premier critère
+        sortCriteriaChoiceBox.getSelectionModel().selectFirst();
+
+        // Écouteur pour détecter les changements de sélection
+        sortCriteriaChoiceBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                if (newValue.equals("num_ch")) {
+                    sortByNum();
+                } else if (newValue.equals("nom")) {
+                    sortByNom();
+                } else if (newValue.equals("email")) {
+                    sortByMail();
+                }
+            }
+        });
+
+        // Initialise les colonnes du TableView et charge les données
+        initializet();
+    }
+
+    // Méthode de tri par ID
+    private void sortByNom() {
+        ObservableList<Transpoteur> transpoteurs= tableview.getItems();
+        transpoteurs.sort(Comparator.comparing(Transpoteur::getNom));
+        tableview.setItems(transpoteurs);
+    }
+
+    // Méthode de tri par nom de centre
+    private void sortByMail() {
+        ObservableList<Transpoteur> transpoteurs = tableview.getItems();
+
+        transpoteurs.sort(Comparator.comparing(Transpoteur::getEmail));
+        tableview.setItems(transpoteurs);
+    }
+
+    // Méthode de tri par ville
+    private void sortByNum() {
+        ObservableList<Transpoteur> transpoteurs = tableview.getItems();
+        transpoteurs.sort(Comparator.comparing(Transpoteur::getNum_ch));
+        tableview.setItems(transpoteurs);
     }
 
 

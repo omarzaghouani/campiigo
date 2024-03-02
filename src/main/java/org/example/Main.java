@@ -1,19 +1,14 @@
 package org.example;
 
 import entites.Transport;
-
 import entites.Transpoteur;
 import entites.Vehicule;
-
-
 import service.TransportService;
-
 import service.TranspoteurService;
 import service.VehiculeService;
-
+//import utils.JavaMail;
 
 import java.time.LocalDate;
-import java.util.List;
 
 public class Main {
 
@@ -22,12 +17,14 @@ public class Main {
 
       Transport t = new Transport(78,
               LocalDate.of(2024,6,19),  LocalDate.of(2025,9,6), 9,15);
+        String recipientEmail = "omarzaghouani01@gmail.com";
+
 
         TransportService ps = new TransportService() {
 
         };
-        //ps.add(t);
-
+        ps.add(t);
+        //JavaMail.sendMail(recipientEmail, transport);
         // ps.delete(t);
       // ps.update(t);
         /* int num_chToSearch = 78; // Example num_ch to search for
@@ -42,7 +39,7 @@ TranspoteurService psr= new TranspoteurService(){
    //psr.addt(t2);
     //psr.deletet(t2);
      //  psr.updatet(t2);
-    psr.readAll().forEach(System.out::println);
+   // psr.readAll().forEach(System.out::println);
 
         Vehicule v=new Vehicule(122,"van familiale",7, 150, 148);
        VehiculeService psv= new VehiculeService(){

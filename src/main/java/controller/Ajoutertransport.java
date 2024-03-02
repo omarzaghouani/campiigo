@@ -1,13 +1,14 @@
 package controller;
 
 import entites.Transport;
-
+import entites.Transpoteur;
 import entites.Vehicule;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.Scene;
@@ -17,6 +18,8 @@ import javafx.scene.control.TableColumn;
 import javafx.stage.Stage;
 import service.TransportService;
 import service.VehiculeService;
+import service.TranspoteurService;
+import java.util.Date;
 import java.util.List;
 import java.net.URL;
 import java.time.LocalDate;
@@ -24,7 +27,7 @@ import java.time.LocalDate;
 import java.io.IOException;
 import java.util.ResourceBundle;
 
-public class Ajoutertransport {
+public class Ajoutertransport implements Initializable {
     @FXML
     private ChoiceBox<Integer> idvehicule;
     @FXML
@@ -56,77 +59,96 @@ public class Ajoutertransport {
     @FXML
     private TableView<Transport> tableview;
     @FXML
-    private TableColumn<?, ?> colcapacite;
+    private TableColumn<Vehicule, Integer> colcapacite;
 
     @FXML
-    private TableColumn<?, ?> colda;
+    private TableColumn<Transport, Date> colda;
 
     @FXML
-    private TableColumn<?, ?> coldd;
+    private TableColumn<Transport, Date> coldd;
 
     @FXML
-    private TableColumn<?, ?> colnum_ch;
+    private TableColumn<Transport, Integer> colnum_ch;
 
     @FXML
-    private TableColumn<?, ?> colnum_t;
+    private TableColumn<Transport, Integer> colnum_t;
 
     @FXML
-    private TableColumn<?, ?> colnum_v;
+    private TableColumn<Transport, Integer> colnum_v;
 
     @FXML
-    private TableColumn<?, ?> coltype;
-
+    private TableColumn<Vehicule, String> coltype;
 
 
     @FXML
-    private TableColumn<?, ?> coutcout;
+    private ChoiceBox<String> idtranspoteur;
+    @FXML
+    private TableColumn<Transport, Integer> coutcout;
 
     @FXML
-    private TableView<Integer> vehiculeTableView;
+    private TableView<Transport> vehiculeTableView;
 
     private final TransportService transportService = new TransportService();
     private final VehiculeService vehiculeService = new VehiculeService();
+    private final TransportService transpoteurService = new TransportService();
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
          VehiculeService num_v= new VehiculeService();
-    populateVehiculeTableView(vehiculeTableView);
-    populateVehiculeTableView(vehiculeTableView);
+    populateVehiculeTableView();
         initTableColumns();
-        loadTransport();
-        populateVehiculeTableView(vehiculeTableView);
+        //loadTransport();
+      populatenum_chComboBox();
+
+    }
+
+   private void populatenum_chComboBox() {
+        TranspoteurService tr = new TranspoteurService();
+        List<Transpoteur> transpoteurs = tr.readAll();
+
+        // Print the size of the transpoteurs list for debugging
+        System.out.println("Number of vehicles retrieved: " + transpoteurs.size());
+
+        ObservableList<String> nom = FXCollections.observableArrayList();
+
+        for (Transpoteur transpoteur : transpoteurs) {
+            nom.add(transpoteur.getNom());
+            System.out.println("Added vehicle ID: " + transpoteur.getNom());
+        }
+
+        idtranspoteur.setItems(nom);
 
     }
 
     private void initTableColumns() {
+        TransportService t=new TransportService();
+        List<Transport> list=t.readAll();
+        ObservableList<Transport> liste=FXCollections.observableArrayList(list);
+        vehiculeTableView.setItems(liste);
         // Transport table columns
-        colnum_ch.setCellValueFactory(new PropertyValueFactory<>("num_ch"));
-        colda.setCellValueFactory(new PropertyValueFactory<>("da"));
-        coldd.setCellValueFactory(new PropertyValueFactory<>("dd"));
-        colnum_v.setCellValueFactory(new PropertyValueFactory<>("num_v"));
-        coutcout.setCellValueFactory(new PropertyValueFactory<>("cout"));
+        colnum_ch.setCellValueFactory(new PropertyValueFactory<Transport,Integer>("num_ch"));
+        colda.setCellValueFactory(new PropertyValueFactory<Transport, Date>("da"));
+        coldd.setCellValueFactory(new PropertyValueFactory<Transport,Date>("dd"));
+        colnum_v.setCellValueFactory(new PropertyValueFactory<Transport,Integer>("num_v"));
+        coutcout.setCellValueFactory(new PropertyValueFactory<Transport,Integer>("cout"));
 
         // Vehicule table columns
-        colcapacite.setCellValueFactory(new PropertyValueFactory<>("capacite"));
-        colda.setCellValueFactory(new PropertyValueFactory<>("da"));
-        coldd.setCellValueFactory(new PropertyValueFactory<>("dd"));
-        colnum_ch.setCellValueFactory(new PropertyValueFactory<>("num_ch"));
-        colnum_t.setCellValueFactory(new PropertyValueFactory<>("num_t"));
-        colnum_v.setCellValueFactory(new PropertyValueFactory<>("num_v"));
-        coltype.setCellValueFactory(new PropertyValueFactory<>("type"));
-        coutcout.setCellValueFactory(new PropertyValueFactory<>("cout"));
+        //colcapacite.setCellValueFactory(new PropertyValueFactory<Vehicule,Integer>("capacite"));
+        colnum_t.setCellValueFactory(new PropertyValueFactory<Transport,Integer>("num_t"));
+       // coltype.setCellValueFactory(new PropertyValueFactory<Vehicule,String>("type"));
+
     }
 
 
-    private void loadTransport() {
-        /*VehiculeService vehiculeService = new VehiculeService();
-        List<Vehicule>  vehicules = vehiculeService.readAll();
-        ObservableList<Vehicule> observableList = FXCollections.observableArrayList();
-        tableview.setItems(observableList);*/
-        List<Transport> transports = transportService.readAll();
-        ObservableList<Transport> transportList = FXCollections.observableArrayList(transports);
-        tableview.setItems(transportList);
-    }
-    public void populateVehiculeTableView(TableView<Integer> tableview) {
+//    private void loadTransport() {
+//        /*VehiculeService vehiculeService = new VehiculeService();
+//        List<Vehicule>  vehicules = vehiculeService.readAll();
+//        ObservableList<Vehicule> observableList = FXCollections.observableArrayList();
+//        tableview.setItems(observableList);*/
+//        List<Transport> transports = transportService.readAll();
+//        ObservableList<Transport> transportList = FXCollections.observableArrayList(transports);
+//        tableview.setItems(transportList);
+//    }
+    public void populateVehiculeTableView() {
         VehiculeService vehiculelist = new VehiculeService();
         List<Vehicule> vehicules = vehiculelist.readAll();
         ObservableList<Integer> num_v = FXCollections.observableArrayList();
@@ -135,7 +157,7 @@ public class Ajoutertransport {
             num_v.add(num.getNum_v());
             System.out.println("Added vehicle ID: " + num.getNum_v());
 
-            vehiculeTableView.setItems(num_v);
+
 
         /*colcapacite.setCellValueFactory(new PropertyValueFactory<>("capacite"));
         colda.setCellValueFactory(new PropertyValueFactory<>("da"));
@@ -148,32 +170,28 @@ public class Ajoutertransport {
 
         vehiculeTableView.getItems().clear();
         vehiculeTableView.getItems().addAll(vehicules);*/
+            idvehicule.setItems(num_v);
 
         }
 
-    /*public void populatenum_vComboBox() {
+      /*  public void populatenum_chComboBox() {
+            TranspoteurService tr = new TranspoteurService();
+            List<Transpoteur> transpoteurs = tr.readAll();
 
-        VehiculeService v = new VehiculeService();
-        List<Vehicule> vehicules = null;
+            // Print the size of the transpoteurs list for debugging
+            System.out.println("Number of vehicles retrieved: " + transpoteurs.size());
 
-        vehicules = v.readAll();
-        // Print the size of vehicules list for debugging
-        System.out.println("Number of vehicles retrieved: " + vehicules.size());
+            ObservableList<Integer> num_ch = FXCollections.observableArrayList();
 
-        ObservableList<Integer> num_v = FXCollections.observableArrayList();
+            for (Transpoteur transpoteur : transpoteurs) {
+                num_ch.add(transpoteur.getNum_ch());
+                System.out.println("Added vehicle ID: " + transpoteur.getNum_ch());
+            }
 
-        for (Vehicule num : vehicules) {
-            num_v.add(num.getNum_v());
-            System.out.println("Added vehicle ID: " + num.getNum_v());
+            idtranspoteur.setItems(num_ch);
+        }*/
 
-        }
-
-       idvehicule .setItems(num_v);
     }
-*/
-    }
-
-
     @FXML
     void GoToAfficher(ActionEvent event) {
         try {

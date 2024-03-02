@@ -1,27 +1,36 @@
 package controller;
 
 
-
 import entites.Vehicule;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import service.VehiculeService;
+
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-
-import service.VehiculeService;
-
 public class AfficherVehicule {
+    @FXML
+    private ImageView imagevi;
+    @FXML
+    private Button buuton_im;
+    @FXML
+    private Button button_sta;
     @FXML
     private Button button_ajouter;
 
@@ -64,6 +73,7 @@ public class AfficherVehicule {
     @FXML
     private TextField txtnum_ch_supp;
     private final VehiculeService  VehiculeService =new VehiculeService() ;
+    private File selectedImageFile;
 
     public void initialize() {
         // Initialise les colonnes du TableView
@@ -120,6 +130,20 @@ public class AfficherVehicule {
 
     }
 
+    private PDFGenerator pdfGenerator = new PDFGenerator();
+
+    @FXML
+    void generatePDF(ActionEvent event) {
+        Vehicule vehicule = tableview.getSelectionModel().getSelectedItem();
+        if (vehicule != null) {
+            PDFGenerator pdfGenerator = new PDFGenerator(); // Créez une instance de PDFGenerator
+            String filePath = "C:\\Users\\omarz\\OneDrive\\Bureau\\xampp\\htdocs\\connexioncapmping3a16\\pdf\\fichier.pdf"; // Spécifiez le chemin du fichier PDF à créer
+            pdfGenerator.generateVehiculePDF(vehicule, filePath, "C:/Users/omarz/OneDrive/Bureau/xampp/htdocs/connexioncapmping3a16/image/lm.png");
+            System.out.println("PDF généré avec succès !");
+        } else {
+            System.out.println("Sélectionnez un vehicule avant de générer le PDF.");
+        }
+    }
 
 
     @FXML
@@ -196,5 +220,60 @@ public class AfficherVehicule {
 
 
 
+    @FXML
+    void stave(ActionEvent event) {
+        try {
+            // Load the Event.fxml file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/chart.fxml"));
+            javafx.scene.Parent root = loader.load();
+
+            // Show the AfficherUser.fxml scene
+            Stage stage = (Stage) button_sta.getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+    @FXML
+    void ajouterImage(ActionEvent event) {
+        // Get the source node of the event
+        Node sourceNode = (Node) event.getSource();
+        if (sourceNode != null && sourceNode.getScene() != null) {
+            Scene scene = sourceNode.getScene();
+
+            // Create a FileChooser to select an image file
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Choisir une image");
+            fileChooser.getExtensionFilters().addAll(
+                    new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.jpeg", "*.gif")
+            );
+
+            // Show the file chooser dialog and get the selected file
+            selectedImageFile = fileChooser.showOpenDialog(scene.getWindow());
+
+            // If a file is selected, load it into the ImageView
+            if (selectedImageFile != null) {
+                try {
+                    // Load the selected image into an Image object
+                    Image image = new Image(selectedImageFile.toURI().toString());
+
+                    // Set the Image object to the ImageView
+                    imagevi.setImage(image);
+
+                    // Here, you can also process the selected image file further if needed
+
+                } catch (Exception e) {
+                    System.out.println("Failed to load the selected image.");
+                    e.printStackTrace();
+                }
+            }
+        } else {
+            System.out.println("Source node or scene not found.");
+        }
+    }
 
 }

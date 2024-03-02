@@ -12,7 +12,6 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import service.VehiculeService;
-import javafx.scene.image.Image;
 
 import java.io.IOException;
 import java.net.URL;
@@ -99,6 +98,7 @@ public class AjouterVehicule implements Initializable {
             Vehicule v = new Vehicule(num_ve, selectedType, cpt, prixunii, num);
             VehiculeService psv = new VehiculeService();
             message = psv.add(v);
+
 
             if (!message ) {
                 // Display success message to the user

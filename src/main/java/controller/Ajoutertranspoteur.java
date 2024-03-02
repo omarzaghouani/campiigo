@@ -6,11 +6,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import service.TranspoteurService;
+import utils.Email;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -73,6 +74,8 @@ public class Ajoutertranspoteur {
             Transpoteur tr = new Transpoteur(num_c,nomm,prenomm,numtell,emaill,datenn,num_tt);
             TranspoteurService psr = new TranspoteurService();
             message = psr.addt(tr);
+            Email e=new Email();
+            e.sendEmail(emaill,"transporteur est Ajouter","Ajout avec succées merci pour votre confiance");
             if (!message ) {
                 // Display success message to the user
                 Alert alert = new Alert(Alert.AlertType.ERROR);

@@ -109,22 +109,27 @@
 
          </children>
       </AnchorPane>
-      <ChoiceBox fx:id="idvehicule" layoutX="225.0" layoutY="416.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="idvehicule" layoutX="392.0" layoutY="286.0" prefWidth="150.0" />
       <TableView fx:id="vehiculeTableView" layoutX="217.0" layoutY="511.0" prefHeight="200.0" prefWidth="573.0">
          <columns>
             <TableColumn fx:id="colnum_v" prefWidth="75.0" text="num_v" />
-            <TableColumn fx:id="coltype" prefWidth="75.0" text="type" />
-            <TableColumn fx:id="colcapacite" prefWidth="75.0" text="capacite" />
+<!--            <TableColumn fx:id="coltype" prefWidth="75.0" text="type" />-->
+<!--            <TableColumn fx:id="colcapacite" prefWidth="75.0" text="capacite" />-->
             <TableColumn fx:id="colnum_ch" prefWidth="75.0" text="num_ch" />
-            <TableColumn fx:id="colnum_t" prefWidth="75.0" text="num_t" />
-            <TableColumn fx:id="lnum_ch" prefWidth="59.20001220703125" text="num_ch" />
-            <TableColumn fx:id="coldd" prefWidth="91.20001220703125" text="dd" />
-            <TableColumn fx:id="colda" prefWidth="48.80010986328125" text="da" />
-            <TableColumn fx:id="lnum_v" minWidth="0.0" prefWidth="98.400146484375" text="num_v" />
-            <TableColumn fx:id="coutcout" prefWidth="81.599853515625" text="cout" />
+            <TableColumn fx:id="colnum_t" prefWidth="100.20001220703125" text="num_t" />
+            <TableColumn fx:id="coldd" prefWidth="105.39996337890625" text="dd" />
+            <TableColumn fx:id="colda" prefWidth="98.0" text="da" />
+            <TableColumn fx:id="coutcout" prefWidth="118.79998779296875" text="cout" />
          </columns>
       </TableView>
-      <Label layoutX="237.0" layoutY="393.0" text="list chauffeur" textFill="#0930f4" />
+      <Label layoutX="414.0" layoutY="268.0" text="vehicule disponible" textFill="#0930f4" />
       <Label layoutX="239.0" layoutY="483.0" text="list vehiculebel" textFill="#130fc7" />
+      <ChoiceBox fx:id="idtranspoteur" layoutX="392.0" layoutY="109.0" prefWidth="150.0" />
+      <ImageView fitHeight="173.0" fitWidth="324.0" layoutX="630.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Capture%20d’écran%202024-02-26%20004957.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="419.0" layoutY="91.0" text="chaufeur dispo" textFill="#2e1dea" />
    </children>
 </AnchorPane>

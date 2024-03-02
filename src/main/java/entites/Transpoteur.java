@@ -23,7 +23,7 @@ public class Transpoteur {
         this.daten = daten;
         this.num_t = num_t;
     }*/
-
+public Transpoteur(){}
     public Transpoteur(int num_ch, String nom, String prenom, int numtel, String email, LocalDate daten, int num_t) {
         this.num_ch = num_ch;
         this.nom = nom;
