@@ -36,11 +36,11 @@
             <Font name="System Bold" size="20.0" />
          </font></Label>
         <TextField fx:id="userEmailText" editable="false" />
-        <Label prefHeight="30.0" prefWidth="110.0" text="Rôle:" textFill="#ebcc13">
+        <Label prefHeight="30.0" prefWidth="240.0" text="Numero De Telephone:" textFill="#ebcc13">
          <font>
             <Font name="System Bold" size="20.0" />
          </font></Label>
-        <TextField fx:id="userRoleText" editable="false" />
+        <TextField fx:id="userNumTel" editable="false" />
         <Button fx:id="modifierButton" onAction="#EditProfile" style="-fx-background-color: #ef5e10;" text="Modifier">
          <font>
             <Font size="17.0" />
@@ -57,7 +57,6 @@
       </children></AnchorPane>
    <ImageView fx:id="profileImageView" fitHeight="226.0" fitWidth="238.0" layoutX="248.0" layoutY="230.0" pickOnBounds="true" preserveRatio="true" />
    <Button fx:id="captureButton" layoutX="234.0" layoutY="485.0" mnemonicParsing="false" onAction="#capturePhoto" prefHeight="26.0" prefWidth="123.0" style="-fx-background-color: #ef5e10;" text="Capturer" />
-   <Button fx:id="validerButton" layoutX="402.0" layoutY="485.0" mnemonicParsing="false" onAction="#validerPhoto" prefHeight="26.0" prefWidth="123.0" style="-fx-background-color: #ef5e10;" text="Valider" />
    <Label layoutX="592.0" layoutY="167.0" prefHeight="46.0" prefWidth="262.0" text="      Votre Compte:" textAlignment="CENTER" textFill="#ebcc13">
       <font>
          <Font name="System Bold Italic" size="28.0" />

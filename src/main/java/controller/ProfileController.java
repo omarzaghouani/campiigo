@@ -1,6 +1,7 @@
 package controller;
-import entities.ImageSingleton;
+
 import com.github.sarxos.webcam.Webcam;
+import entities.ImageSingleton;
 import entities.Session;
 import entities.utilisateur;
 import javafx.embed.swing.SwingFXUtils;
@@ -17,10 +18,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import services.utilisateurServices;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class ProfileController implements Initializable {
@@ -89,6 +94,24 @@ public class ProfileController implements Initializable {
 
             // Définissez l'image sur le ImageView
             profileImageView.setImage(fxImage);
+
+            // Enregistrez l'image dans la base de données et mettez à jour l'utilisateur
+            utilisateurServices us = new utilisateurServices();
+            utilisateur user = Session.getInstance().getUser();
+            if (user != null) {
+                // Convertissez l'image JavaFX en byte[] pour l'enregistrement dans la base de données
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                ImageIO.write(SwingFXUtils.fromFXImage(fxImage, null), "jpg", baos);
+                byte[] imageBytes = baos.toByteArray();
+
+                // Mettre à jour l'utilisateur avec la nouvelle photo
+                user.setPhoto_d(Arrays.toString(imageBytes));
+                us.modifier(user); // Mettre à jour l'utilisateur dans la base de données
+
+                // Mettre à jour l'image affichée dans l'interface
+                Image capturedImage = fxImage;
+                ImageSingleton.getInstance().setCapturedImage(capturedImage);
+            }
         } catch (Exception e) {
             // Gérer les exceptions liées à la capture d'image
             e.printStackTrace();
@@ -96,12 +119,12 @@ public class ProfileController implements Initializable {
             // N'oubliez pas de fermer la webcam après utilisation
             webcam.close();
         }
-        Image capturedImage = fxImage;
-        ImageSingleton.getInstance().setCapturedImage(capturedImage);
-
         return fxImage;
     }
-
+    public void setUser(utilisateur user) {
+        // Appeler la méthode pour initialiser l'interface utilisateur avec les informations de l'utilisateur
+        initialize(null, null);
+    }
     public void EditProfile(ActionEvent actionEvent) throws IOException {
         // Implémenter la logique pour modifier le profil
 

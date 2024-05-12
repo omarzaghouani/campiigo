@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class DataSource {
     private static Connection cnx;
-    private static String url = "jdbc:mysql://localhost:3306/campigoo";
+    private static String url = "jdbc:mysql://localhost:3306/campigo";
     private static String login = "root";
     private static String pwd = "";
     private static DataSource instance;

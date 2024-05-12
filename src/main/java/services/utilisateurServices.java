@@ -74,11 +74,40 @@ public class utilisateurServices implements Iservices<utilisateur> {
                 rs.getString("Email"),
                 rs.getString("MotDePasse"),
                 UserRole.valueOf(rs.getString("Role")),
-                rs.getInt("NumeroDeTelephone")
+                rs.getInt("NumeroDeTelephone"),
+                rs.getString("photo_d")
         );
     }
 
+    public static utilisateur getUtilisateurByEmail(String email) {
+        utilisateur user = null;
 
+        // Préparez votre requête SQL pour rechercher un utilisateur par son e-mail
+        String req = "SELECT * FROM utilisateur WHERE Email = ?";
+
+        try {
+            // Assurez-vous que la connexion est valide et non fermée
+            if (conn != null && !conn.isClosed()) {
+                try (PreparedStatement preparedStatement = conn.prepareStatement(req)) {
+                    preparedStatement.setString(1, email);
+
+                    try (ResultSet rs = preparedStatement.executeQuery()) {
+                        if (rs.next()) {
+                            user = mapResultSetToUtilisateur(rs);
+                        }
+                    }
+                }
+            } else {
+                // Lancez une exception si la connexion n'est pas établie
+                throw new SQLException("La connexion à la base de données n'est pas établie. Vérifiez la configuration de la connexion.");
+            }
+        } catch (SQLException ex) {
+            // Gérez les exceptions SQL et lancez une exception d'exécution plus informative
+            throw new RuntimeException("Erreur lors de la récupération de l'utilisateur par e-mail. Détails : " + ex.getMessage(), ex);
+        }
+
+        return user;
+    }
     public static boolean estUtilisateurUnique(int id, String nouveauEmail) {
         conn = DataSource.getInstance().getCnx();
 
@@ -106,8 +135,8 @@ public class utilisateurServices implements Iservices<utilisateur> {
 
     @Override
     public void ajouter(utilisateur utilisateur) throws SQLException {
-        String sql = "INSERT INTO utilisateur (nom, prenom, Role, NumeroDeTelephone, Email, MotDePasse) " +
-                "VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO utilisateur (nom, prenom, Role, NumeroDeTelephone, Email, MotDePasse, photo_d) " +
+                "VALUES (?, ?, ?, ?, ?, ?,?)";
 
         try (PreparedStatement preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, utilisateur.getNom());
@@ -116,6 +145,7 @@ public class utilisateurServices implements Iservices<utilisateur> {
             preparedStatement.setInt(4, utilisateur.getNumeroDeTelephone());
             preparedStatement.setString(5, utilisateur.getEmail());
             preparedStatement.setString(6, utilisateur.getMotDePasse());
+            preparedStatement.setString(7,utilisateur.getPhoto_d());
 
             preparedStatement.executeUpdate();
 
@@ -173,6 +203,7 @@ public class utilisateurServices implements Iservices<utilisateur> {
                         rs.getString("MotDePasse"),
                         UserRole.valueOf(rs.getString("Role")),
                         rs.getInt("NumeroDeTelephone")
+
                                 );
 
                 utilisateurs.add(user);
@@ -224,6 +255,7 @@ public class utilisateurServices implements Iservices<utilisateur> {
                     p.setNumeroDeTelephone(RS.getInt("numeroDeTelephone"));
                     p.setEmail(RS.getString("Email"));
                     p.setMotDePasse(RS.getString("MotDePasse"));
+                    p.setPhoto_d(RS.getString("photo_d"));
                 }
             }
         } catch (SQLException ex) {
@@ -231,5 +263,68 @@ public class utilisateurServices implements Iservices<utilisateur> {
         }
         return p;
     }
+    public static List<utilisateur> rechercherUtilisateurs(String nom, String prenom, String email, UserRole role) {
+        List<utilisateur> utilisateurs = new ArrayList<>();
+        StringBuilder query = new StringBuilder("SELECT * FROM utilisateur WHERE 1=1");
 
+        if (nom != null && !nom.isEmpty()) {
+            query.append(" AND Nom LIKE ?");
+        }
+        if (prenom != null && !prenom.isEmpty()) {
+            query.append(" AND Prenom LIKE ?");
+        }
+        if (email != null && !email.isEmpty()) {
+            query.append(" AND Email LIKE ?");
+        }
+        if (role != null) {
+            query.append(" AND role = ?");
+        }
+
+        // Assurez-vous que la connexion est initialisée
+        if (conn == null) {
+            initConnection();
+        }
+
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query.toString())) {
+            int index = 1;
+            if (nom != null && !nom.isEmpty()) {
+                preparedStatement.setString(index++, "%" + nom + "%");
+            }
+            if (prenom != null && !prenom.isEmpty()) {
+                preparedStatement.setString(index++, "%" + prenom + "%");
+            }
+            if (email != null && !email.isEmpty()) {
+                preparedStatement.setString(index++, "%" + email + "%");
+            }
+            if (role != null) {
+                preparedStatement.setString(index++, role.name());
+            }
+
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                while (rs.next()) {
+                    utilisateurs.add(mapResultSetToUtilisateur(rs));
+                }
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erreur lors de la recherche des utilisateurs. Détails : " + ex.getMessage(), ex);
+        }
+
+        return utilisateurs;
+    }
+
+
+    private static void initConnection() {
+        try {
+            // Remplacez ces valeurs par vos propres informations de connexion
+            String url = "jdbc:mysql://localhost:3306/campigo";
+            String user = "root";
+            String password = "";
+
+            conn = DriverManager.getConnection(url, user, password);
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+            // Gérer l'exception, par exemple en affichant un message d'erreur
+        }
+    }
 }

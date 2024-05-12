@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.web.WebView?>
+
+<AnchorPane prefHeight="577.0" prefWidth="716.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AjouterCentreController">
+   <children>
+
+       <Label layoutX="345.0" layoutY="119.0" text="id_centre" />
+       <Label layoutX="338.0" layoutY="178.0" text="nom_centre" />
+       <Label layoutX="369.0" layoutY="237.0" text="ville" />
+       <TextField fx:id="txtid_centre" layoutX="432.0" layoutY="115.0" />
+       <TextField fx:id="txtnom_centre" layoutX="439.0" layoutY="174.0" />
+       <TextField fx:id="txtville" layoutX="439.0" layoutY="233.0" />
+      <TextField fx:id="txtprix_centre" layoutX="440.0" layoutY="308.0" />
+      <TextField fx:id="txtnum_tel" layoutX="440.0" layoutY="397.0" />
+      <TextField fx:id="txtnbre_activite" layoutX="439.0" layoutY="478.0" />
+      <Label layoutX="369.0" layoutY="312.0" text="mail" />
+      <Label layoutX="372.0" layoutY="401.0" text="tel" />
+      <Label layoutX="337.0" layoutY="482.0" text="nombre activite" />
+      <WebView fx:id="mapWebView" layoutX="626.0" layoutY="141.0" prefHeight="270.0" prefWidth="200.0" />
+       <Button layoutX="487.0" layoutY="578.0" mnemonicParsing="false" onAction="#ajoutercentre" text="Ajouter" textFill="#151501" />
+      <AnchorPane prefHeight="641.0" prefWidth="200.0" style="-fx-background-color: #325B69;">
+         <children>
+            <Button layoutY="213.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="200.0" style="-fx-background-color: #325B69;" text="Centre" textFill="#fcc03e">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <effect>
+                  <Blend />
+               </effect>
+            </Button>
+            <Button fx:id="activite_button" layoutY="461.0" mnemonicParsing="false" onAction="#GoToActivite" prefHeight="26.0" prefWidth="200.0" style="-fx-background-color: #325B69;" text="Activite" textFill="#fcc03e">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="button_utilisateur" layoutY="150.0" mnemonicParsing="false" onAction="#GoToUtilisateur" prefHeight="26.0" prefWidth="200.0" style="-fx-background-color: #325B69;" text="Utilisateur" textFill="#fcc03e">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="-2.0" layoutY="-2.0" prefHeight="64.0" prefWidth="846.0" style="-fx-background-color: #325B69;">
+         <children>
+            <Button fx:id="AjouterButton" layoutX="184.0" layoutY="-1.0" mnemonicParsing="false" onAction="#GoToAjoutU" prefHeight="102.0" prefWidth="179.0" style="-fx-background-color: #325B69;" text="Afficher" textFill="#fcc03e">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Button>
+            <Button fx:id="button_mod" layoutX="527.0" layoutY="-1.0" mnemonicParsing="false" onAction="#GoToMod" prefHeight="102.0" prefWidth="191.0" style="-fx-background-color: #325B69;" text="Modifier" textFill="#fcc03e">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Button>
+            <Button layoutX="363.0" layoutY="-1.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="191.0" style="-fx-background-color: #325B69;" text="Ajouter" textFill="#fcc03e">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Button>
+            <Button fx:id="button_mail" layoutX="700.0" layoutY="3.0" mnemonicParsing="false" onAction="#GoToMail" prefHeight="94.0" prefWidth="142.0" style="-fx-background-color: #325B69;" text="Mail" textFill="#fcc03e">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="102.0" fitWidth="200.0" layoutY="3.0">
+               <image>
+                  <Image url="@logoCampigo.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+
+
+
+   </children>
+</AnchorPane>

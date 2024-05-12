@@ -1,15 +1,15 @@
 package entities;
 
 public  class utilisateur {
-    private int id;
+    private static int id;
     private static String nom;
     private static String prenom;
     private static UserRole role;
     private int numeroDeTelephone;
     private static String email;
     private String motDePasse;
-
-    public utilisateur( int id,String nom, String prenom, String email, String motDePasse, UserRole role, int numeroDeTelephone) {
+    private  String photo_d;
+    public utilisateur( int id,String nom, String prenom, String email, String motDePasse, UserRole role, int numeroDeTelephone, String photo_d) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -17,15 +17,17 @@ public  class utilisateur {
         this.numeroDeTelephone = numeroDeTelephone;
         this.email = email;
         this.motDePasse = motDePasse;
+        this.photo_d = photo_d;
     }
 
-    public utilisateur(String nom, String prenom, UserRole role, int numeroDeTelephone, String email, String motDePasse) {
+    public utilisateur(String nom, String prenom, UserRole role, int numeroDeTelephone, String email, String motDePasse, String photo_d) {
         this.nom = nom;
         this.prenom = prenom;
         this.role = role;
         this.numeroDeTelephone = numeroDeTelephone;
         this.email = email;
         this.motDePasse = motDePasse;
+        this.photo_d = photo_d;
     }
 
     public utilisateur(int id) {
@@ -46,6 +48,16 @@ public  class utilisateur {
         this.motDePasse = motDePasse;
     }
 
+    public utilisateur(int id, String nom, String prenom, String email, String motDePasse, UserRole role, int numeroDeTelephone) {
+  this.id = id;
+  this.nom = nom;
+  this.prenom = prenom;
+  this.email = email;
+  this.motDePasse = motDePasse;
+  this.role = role;
+  this.numeroDeTelephone = numeroDeTelephone;
+    }
+
     @Override
     public String toString() {
         return "utilisateur{" +
@@ -59,7 +71,7 @@ public  class utilisateur {
                 '}';
     }
 
-    public int getId() {
+    public static int getId() {
         return id;
     }
 
@@ -96,6 +108,11 @@ public  class utilisateur {
     private boolean isValidRole(UserRole role) {
         return role.equals("Camp_Owner") || role.equals("Simple_Utilisateur") || role.equals("Admin");
     }
+    public void Utilisateur(String nom, UserRole role) {
+        this.nom = nom;
+        this.role = role;
+    }
+
 
     public int getNumeroDeTelephone() {
         return numeroDeTelephone;
@@ -119,6 +136,14 @@ public  class utilisateur {
 
     public String getMotDePasse() {
         return motDePasse;
+    }
+
+    public String getPhoto_d() {
+        return photo_d;
+    }
+
+    public void setPhoto_d(String photo_d) {
+        this.photo_d = photo_d;
     }
 }
 

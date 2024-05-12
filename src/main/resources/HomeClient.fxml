@@ -4,6 +4,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.media.MediaView?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
@@ -60,5 +61,7 @@
          </children>
       </AnchorPane>
       <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="uploadButton" layoutX="732.0" layoutY="515.0" mnemonicParsing="false" onAction="#handleUploadButtonAction" prefHeight="51.0" prefWidth="141.0" style="-fx-background-color: #ef5e10;" text="VOIR VIDEO" />
+      <MediaView fx:id="mediaView" fitHeight="400.0" fitWidth="420.0" layoutX="289.0" layoutY="125.0" />
    </children>
 </AnchorPane>

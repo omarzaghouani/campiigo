@@ -30,7 +30,7 @@ public class Mainfx extends Application {
             AfficherUtilisateurController controller = new AfficherUtilisateurController(connexion);
 
             // Load the FXML file using the controller you just created
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Profile.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/LoginUser.fxml"));
             Parent root = loader.load();
 
             Scene scene = new Scene(root);

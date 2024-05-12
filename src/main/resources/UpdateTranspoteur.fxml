@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="546.0" prefWidth="761.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Updatetranspoteur">
+   <children>
+      <AnchorPane prefHeight="546.0" prefWidth="158.0" style="-fx-background-color: #325B69;">
+         <children>
+            <Button fx:id="buttontransport" layoutX="1.0" layoutY="123.0" mnemonicParsing="false" onAction="#GoTotransport" prefHeight="86.0" prefWidth="155.0" style="-fx-background-color: #325B69;" text="transport" textFill="#fcc03e">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="buttontranspoteur" layoutX="1.0" layoutY="222.0" mnemonicParsing="false" onAction="#GoTotranspoteur" prefHeight="68.0" prefWidth="155.0" style="-fx-background-color: #325B69;" text="transpoteur" textFill="#fcc03e">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="buttonvehicule" layoutX="-2.0" layoutY="302.0" mnemonicParsing="false" onAction="#GoTovehicule" prefHeight="85.0" prefWidth="157.0" style="-fx-background-color: #325B69;" text="vehicule" textFill="#fcc03e">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="121.0" fitWidth="155.0" layoutX="1.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../image/lm.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="157.0" prefHeight="78.0" prefWidth="604.0" style="-fx-background-color: #325B69;">
+         <children>
+            <Button fx:id="button_ajouter" layoutX="14.0" layoutY="1.0" mnemonicParsing="false" onAction="#GoToAdd" prefHeight="74.0" prefWidth="118.0" style="-fx-background-color: #325B69;" text="Ajouter" textFill="#fcc03e">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="buttonmodifier" layoutX="147.0" mnemonicParsing="false" onAction="#GoToUpdate" prefHeight="74.0" prefWidth="130.0" style="-fx-background-color: #325B69;" text="Modifier" textFill="#fcc03e">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="buttonafficher" layoutX="320.0" layoutY="1.0" mnemonicParsing="false" onAction="#GoToview" prefHeight="74.0" prefWidth="139.0" style="-fx-background-color: #325B69;" text="Affichier" textFill="#fcc03e">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <Button layoutX="466.0" layoutY="380.0" mnemonicParsing="false" onAction="#modifiertranspotuer" style="-fx-background-color: #325B69;" text="Modifier" textFill="#bbcc20">
+         <font>
+            <Font size="20.0" />
+         </font></Button>
+      <Label layoutX="187.0" layoutY="112.0" text="numero chauffeur" />
+      <Label layoutX="407.0" layoutY="146.0" text="nom" />
+      <Label layoutX="193.0" layoutY="173.0" text="prenom" />
+      <Label layoutX="392.0" layoutY="216.0" text="date de naissance" />
+      <Label layoutX="196.0" layoutY="242.0" text="numero telephone" />
+      <Label layoutX="204.0" layoutY="315.0" text="email" />
+      <Label layoutX="400.0" layoutY="283.0" text="numero transport" />
+      <DatePicker fx:id="dnId" layoutX="391.0" layoutY="238.0" />
+      <TextField fx:id="num_ch" layoutX="188.0" layoutY="134.0" />
+      <TextField fx:id="nom" layoutX="402.0" layoutY="165.0" />
+      <TextField fx:id="prenom" layoutX="190.0" layoutY="194.0" />
+      <TextField fx:id="numtel" layoutX="192.0" layoutY="265.0" />
+      <TextField fx:id="num_t" layoutX="398.0" layoutY="305.0" />
+      <TextField fx:id="email" layoutX="194.0" layoutY="337.0" />
+   </children>
+</AnchorPane>

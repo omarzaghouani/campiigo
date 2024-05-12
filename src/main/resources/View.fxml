@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="textid_centre_supp" prefHeight="641.0" prefWidth="653.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ViewController">
+   <children>
+      <TableView fx:id="tableview" layoutX="213.0" layoutY="140.0" prefHeight="431.0" prefWidth="722.0">
+         <columns>
+            <TableColumn fx:id="colid_centre" prefWidth="75.0" text="id_centre" />
+            <TableColumn fx:id="colnom_centre" prefWidth="75.0" text="nom_centre" />
+            <TableColumn fx:id="colville" prefWidth="75.0" text="ville" />
+            <TableColumn fx:id="colprix_centre" prefWidth="75.0" text="mail" />
+            <TableColumn fx:id="colnum_tel" prefWidth="133.5999755859375" text="num_tel" />
+            <TableColumn fx:id="colnbre_activite" prefWidth="81.60003662109375" text="nbre_activite" />
+            <TableColumn fx:id="colactivite" prefWidth="204.79996337890623" text="activite" />
+         </columns>
+      </TableView>
+      <AnchorPane prefHeight="641.0" prefWidth="200.0" style="-fx-background-color: #325B69;">
+         <children>
+            <Button fx:id="button_centre" layoutY="181.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="200.0" style="-fx-background-color: #325B69;" text="Centre" textFill="#fcc03e">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="buttonactivite" layoutY="378.0" mnemonicParsing="false" onAction="#GoToActivite" prefHeight="26.0" prefWidth="200.0" style="-fx-background-color: #325B69;" text="Activite" textFill="#fcc03e">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="button_utilisateur" layoutX="8.0" layoutY="117.0" mnemonicParsing="false" onAction="#GoToUtilisateur" prefHeight="43.0" prefWidth="183.0" style="-fx-background-color: #325B69;" text="Utilisateur" textFill="#fcc03e">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutY="-42.0" prefHeight="133.0" prefWidth="959.0" style="-fx-background-color: #325B69;">
+         <children>
+            <Button fx:id="ajouter" layoutX="411.0" layoutY="43.0" mnemonicParsing="false" onAction="#GoToAjout" prefHeight="87.0" prefWidth="174.0" style="-fx-background-color: #325B69;" text="Ajouter" textFill="#fcc03e">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Button>
+            <Button layoutX="198.0" layoutY="43.0" mnemonicParsing="false" prefHeight="87.0" prefWidth="174.0" style="-fx-background-color: #325B69;" text="Afficher" textFill="#fcc03e">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Button>
+            <Button fx:id="button_Mod" layoutX="632.0" layoutY="45.0" mnemonicParsing="false" onAction="#GoToMod" prefHeight="87.0" prefWidth="189.0" style="-fx-background-color: #325B69;" text="Modifier" textFill="#fcc03e">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="87.0" fitWidth="174.0" layoutX="14.0" layoutY="45.0">
+               <image>
+                  <Image url="@logoCampigo.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <TextField fx:id="textid_centre" layoutX="741.0" layoutY="105.0" prefHeight="26.0" prefWidth="128.0" />
+      <Button fx:id="supprimerbouton" layoutX="879.0" layoutY="106.0" mnemonicParsing="false" onAction="#supprimer" prefHeight="26.0" prefWidth="56.0" />
+      <ChoiceBox fx:id="sortCriteriaChoiceBox" layoutX="496.0" layoutY="105.0" prefHeight="26.0" prefWidth="236.0">
+         <items>
+            <FXCollections fx:factory="observableArrayList">
+               <String fx:value="ID" />
+               <String fx:value="Nom" />
+               <String fx:value="Ville" />
+            </FXCollections>
+         </items>
+      </ChoiceBox>
+      <Button fx:id="generatePDFButton" layoutX="219.0" layoutY="590.0" mnemonicParsing="false" onAction="#generatePDF" text="pdf" />
+      <ChoiceBox fx:id="villeChoiceBox" layoutX="219.0" layoutY="105.0" prefHeight="26.0" prefWidth="213.0">
+         <items>
+            <FXCollections fx:factory="observableArrayList">
+               <String fx:value="jandouba" />
+               <String fx:value="beja" />
+               <String fx:value="benzart" />
+               <String fx:value="nabeul" />
+               <String fx:value="zaghouen" />
+
+            </FXCollections>
+         </items>
+      </ChoiceBox>
+      <ImageView fitHeight="26.0" fitWidth="34.0" layoutX="399.0" layoutY="106.0">
+         <image>
+            <Image url="@../../../../../../Downloads/kisspng-computer-icons-search-box-button-clip-art-search-5ac0b45a31f007.5421382015225785222046.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

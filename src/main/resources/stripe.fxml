@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="controller.stripe">
+   <children>
+      <Button layoutX="216.0" layoutY="331.0" mnemonicParsing="false" onAction="#processPayment" text="Payer" />
+      <Label layoutX="121.0" layoutY="72.0" text="Montant à donner" />
+      <Label layoutX="126.0" layoutY="118.0" text="Numéro de carte" />
+      <Label layoutX="61.0" layoutY="163.0" text="Votre numéro de téléphone :" />
+      <Label layoutX="60.0" layoutY="234.0" text="Code de sécurité" />
+      <Label layoutX="29.0" layoutY="282.0" text="Date d'expiration" />
+      <TextField fx:id="montantText" layoutX="242.0" layoutY="68.0" />
+      <TextField fx:id="cardNumberField" layoutX="242.0" layoutY="114.0" />
+      <TextField fx:id="numeroTel" layoutX="225.0" layoutY="159.0" />
+      <TextField fx:id="cvcField" layoutX="174.0" layoutY="231.0" />
+      <TextField fx:id="expMonthField" layoutX="151.0" layoutY="278.0" prefHeight="26.0" prefWidth="78.0" />
+      <TextField fx:id="expYearField" layoutX="278.0" layoutY="278.0" prefHeight="26.0" prefWidth="85.0" />
+      <Label layoutX="250.0" layoutY="281.0" prefHeight="18.0" prefWidth="10.0" text="/" />
+   </children>
+</AnchorPane>
