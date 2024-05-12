@@ -1,7 +1,6 @@
 package controller;
 
-import entities.UserRole;
-import entities.utilisateur;
+import entities.User;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
@@ -13,14 +12,14 @@ import java.util.Map;
 
 public class StatistiquesFenetre extends Application {
 
-    public static void afficherStatistiques(ObservableList<utilisateur> utilisateurs) {
+    public static void afficherStatistiques(ObservableList<User> utilisateurs) {
         StatistiquesFenetre fenetre = new StatistiquesFenetre(utilisateurs);
         fenetre.start(new Stage());
     }
 
-    private ObservableList<utilisateur> utilisateurs;
+    private ObservableList<User> utilisateurs;
 
-    public StatistiquesFenetre(ObservableList<utilisateur> utilisateurs) {
+    public StatistiquesFenetre(ObservableList<User> utilisateurs) {
         this.utilisateurs = utilisateurs;
     }
 
@@ -29,8 +28,8 @@ public class StatistiquesFenetre extends Application {
         PieChart pieChart = new PieChart();
         // Logique pour ajouter des données au graphique en utilisant la liste des utilisateurs
         // Assurez-vous que la méthode calculerStatistiquesUtilisateurs accepte ObservableList<utilisateur>
-        Map<UserRole, Integer> statistiques = StatistiquesUtilisateur.calculerStatistiquesUtilisateurs(utilisateurs);
-        for (Map.Entry<UserRole, Integer> entry : statistiques.entrySet()) {
+        Map<String, Integer> statistiques = StatistiquesUtilisateur.calculerStatistiquesUtilisateurs(utilisateurs);
+        for (Map.Entry<String, Integer> entry : statistiques.entrySet()) {
             PieChart.Data data = new PieChart.Data(entry.getKey().toString(), entry.getValue());
             pieChart.getData().add(data);
         }

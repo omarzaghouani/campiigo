@@ -1,7 +1,6 @@
 package controller;
 
-import entities.UserRole;
-import entities.utilisateur;
+import entities.User;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,14 +10,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
-import services.utilisateurServices;
+import services.UserService;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ModifierUtilisateurController {
 
@@ -41,33 +38,38 @@ public class ModifierUtilisateurController {
     private Button saveButton;
 
     @FXML
-    private ChoiceBox<UserRole> userRole;
+    private ChoiceBox<String> userRole;
     @FXML
-    private TableView<utilisateur> tableview;
+    private TableView<User> tableview;
     private int userId;
     // Initialize method
 
     @FXML
     public void initialize() {
         // Set up the StringConverter
-        userRole.setConverter(new StringConverter<UserRole>() {
-            public String toString(UserRole object) {
-                return object == null ? "" : object.name(); // Convert enum to string
+        userRole.setConverter(new StringConverter<String>() {
+            public String toString(String object) {
+                return object == null ? "" : object; // Convert string to string
             }
 
-            public UserRole fromString(String string) {
-                // Convert string back to enum
-                return UserRole.valueOf(string);
+            public String fromString(String string) {
+                // No conversion needed for string
+                return string;
             }
         });
 
         // Add items to the ChoiceBox
+        /*userRole.setItems(FXCollections.observableArrayList(
+                Arrays.stream(UserRole.values())
+                        .filter(role -> role != entities.UserRole.role)
+                        .map(UserRole::name) // Convert enum to string
+                        .collect(Collectors.toList())
+        ));*/
         userRole.setItems(FXCollections.observableArrayList(
-                        Arrays.stream(UserRole.values())
-                                .filter(role -> role != entities.UserRole.role  )
-                                .collect(Collectors.toList())
-                )
-        );
+                "[\"ROLE_ADMIN\"]",
+                "[\"ROLE_USER\"]"
+        ));
+
 }
     // SaveButton action
     @FXML
@@ -82,7 +84,7 @@ public class ModifierUtilisateurController {
         String nouveauEmail = Email.getText();
         String nouveauMotDePasse = MotDePasse.getText();
         String nouveauNumeroDeTelephoneText = NumeroDeTelephone.getText();
-        UserRole nouveauUserRole = userRole.getSelectionModel().getSelectedItem();
+        String nouveauUserRole = userRole.getSelectionModel().getSelectedItem();
 
         // Effectuer les contrôles de saisie
         if (nouveauNom.isEmpty() || nouveauPrenom.isEmpty() || nouveauEmail.isEmpty() || nouveauMotDePasse.isEmpty() || nouveauNumeroDeTelephoneText.isEmpty() || nouveauUserRole == null) {
@@ -104,7 +106,7 @@ public class ModifierUtilisateurController {
             messagesErreur.add("Vérifiez le format de votre Email.");
         }
         // Vérifier l'unicité de l'utilisateur
-        if (utilisateurServices.estUtilisateurUnique(userId, nouveauEmail)) {
+        if (UserService.estUtilisateurUnique(userId, nouveauEmail)) {
             messagesErreur.add("Un utilisateur avec cet email n'existe pas.");
         }
 
@@ -115,12 +117,15 @@ public class ModifierUtilisateurController {
             showAlert(messageErreur, Alert.AlertType.ERROR);
             return;
         }
+        // (int id, String email, String roles, String password, String nom, String prenom, int numerodetelephone, String photo_d)
 
         // Créer un nouvel utilisateur avec les valeurs modifiées
-        utilisateur utilisateurModifie = new utilisateur(userId, nouveauNom, nouveauPrenom, nouveauUserRole, nouveauNumeroDeTelephone, nouveauEmail, nouveauMotDePasse);
+      //  User utilisateurModifie = new User(userId, nouveauNom, nouveauPrenom, nouveauUserRole, nouveauNumeroDeTelephone, nouveauEmail, nouveauMotDePasse);
+        User utilisateurModifie = new User(userId,nouveauEmail,nouveauUserRole,nouveauMotDePasse,nouveauNom,nouveauPrenom, nouveauNumeroDeTelephone,"" );
+
         System.out.println(utilisateurModifie);
         // Appeler le service pour mettre à jour l'utilisateur
-        utilisateurServices userService = new utilisateurServices();
+        UserService userService = new UserService();
         userService.modifier(utilisateurModifie);
 
         // Afficher un message de succès
@@ -139,7 +144,7 @@ public class ModifierUtilisateurController {
     // Récupérer l'ID de l'utilisateur sélectionné
     private int getSelectedUserId() {
         if (tableview != null) {
-            utilisateur selectedUser = tableview.getSelectionModel().getSelectedItem();
+            User selectedUser = tableview.getSelectionModel().getSelectedItem();
 
             // Vérifier que l'utilisateur n'est pas nul
             if (selectedUser != null) {
@@ -173,15 +178,17 @@ public class ModifierUtilisateurController {
     }
 
     // Initialiser les champs avec les données de l'utilisateur sélectionné
-    public void initData(utilisateur selectedUser) {
+    public void initData(User selectedUser) {
         if (selectedUser != null) {
             userId = selectedUser.getId();
             Nom.setText(selectedUser.getNom());
             Prenom.setText(selectedUser.getPrenom());
             Email.setText(selectedUser.getEmail());
-            MotDePasse.setText(selectedUser.getMotDePasse());
-            NumeroDeTelephone.setText(String.valueOf(selectedUser.getNumeroDeTelephone()));
-            userRole.setValue(selectedUser.getRole());
+            MotDePasse.setText(selectedUser.getPassword());
+            NumeroDeTelephone.setText(String.valueOf(selectedUser.getNumerodetelephone()));
+           // userRole.setValue(String.valueOf(UserRole.valueOf(selectedUser.getRoles())));
+            userRole.setValue(selectedUser.getRoles());
+
         }
     }
 

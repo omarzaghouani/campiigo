@@ -6,7 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import services.utilisateurServices;
+import services.UserService;
 import utils.DataSource;
 
 import java.io.IOException;
@@ -15,7 +15,7 @@ import java.sql.Connection;
 public class Mainfx extends Application {
     public static void main(String[] args) {
         // Initialize utilisateurServices before launching the JavaFX application
-        utilisateurServices.initialize();
+        UserService.initialize();
 
         launch(args);
     }

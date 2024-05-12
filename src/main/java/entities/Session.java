@@ -2,7 +2,7 @@ package entities;
 
 public class Session {
     private static Session instance;
-    private utilisateur user;
+    private User user;
 
     private Session() {}
 
@@ -17,11 +17,11 @@ public class Session {
         this.user = null;
     }
 
-    public void setUser(utilisateur user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
-    public utilisateur getUser() {
+    public User getUser() {
         return user;
     }
 

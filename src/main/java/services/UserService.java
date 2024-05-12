@@ -1,18 +1,16 @@
 package services;
 
-import entities.UserRole;
-import entities.utilisateur;
+import entities.User;
 import utils.DataSource;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class utilisateurServices implements Iservices<utilisateur> {
+public class UserService implements Iservices<User>{
     public static Connection conn;
 
-
-    public utilisateurServices() {
+    public UserService() {
         conn = DataSource.getInstance().getCnx();
         if (conn == null) {
             System.out.println("Connection is null!");
@@ -20,12 +18,13 @@ public class utilisateurServices implements Iservices<utilisateur> {
             System.out.println("Connection is valid.");
         }
     }
-    public static utilisateur getUtilisateurById(int userId) {
+
+    public static User getUtilisateurById(int userId) {
         Connection conn = null;
-        utilisateur user = null;
+        User user = null;
 
         // Assuming 'req' is your SQL query, replace it with your actual query
-        String req = "SELECT * FROM utilisateur WHERE id = ?";
+        String req = "SELECT * FROM user WHERE id = ?";
 
         try {
             // Establish a database connection (replace the connection details accordingly)
@@ -65,25 +64,24 @@ public class utilisateurServices implements Iservices<utilisateur> {
 
     }
 
-
-    private static utilisateur mapResultSetToUtilisateur(ResultSet rs) throws SQLException {
-        return new utilisateur(
+    private static User mapResultSetToUtilisateur(ResultSet rs) throws SQLException {
+        return new User(
                 rs.getInt("id"),
+                rs.getString("email"),
+                rs.getString("roles"),
+                rs.getString("password"),
                 rs.getString("nom"),
                 rs.getString("prenom"),
-                rs.getString("Email"),
-                rs.getString("MotDePasse"),
-                UserRole.valueOf(rs.getString("Role")),
-                rs.getInt("NumeroDeTelephone"),
+                rs.getInt("numerodetelephone"),
                 rs.getString("photo_d")
         );
     }
 
-    public static utilisateur getUtilisateurByEmail(String email) {
-        utilisateur user = null;
+    public static User getUtilisateurByEmail(String email) {
+        User user = null;
 
         // Préparez votre requête SQL pour rechercher un utilisateur par son e-mail
-        String req = "SELECT * FROM utilisateur WHERE Email = ?";
+        String req = "SELECT * FROM user WHERE email = ?";
 
         try {
             // Assurez-vous que la connexion est valide et non fermée
@@ -108,6 +106,7 @@ public class utilisateurServices implements Iservices<utilisateur> {
 
         return user;
     }
+
     public static boolean estUtilisateurUnique(int id, String nouveauEmail) {
         conn = DataSource.getInstance().getCnx();
 
@@ -115,7 +114,7 @@ public class utilisateurServices implements Iservices<utilisateur> {
             throw new IllegalStateException("Connection is null. Please initialize it before using this method.");
         }
 
-        String query = "SELECT id FROM utilisateur WHERE id <> ? AND Email = ?";
+        String query = "SELECT id FROM user WHERE id <> ? AND email = ?";
         try (PreparedStatement statement = conn.prepareStatement(query)) {
             statement.setInt(1, id);
             statement.setString(2, nouveauEmail);
@@ -134,24 +133,24 @@ public class utilisateurServices implements Iservices<utilisateur> {
 
 
     @Override
-    public void ajouter(utilisateur utilisateur) throws SQLException {
-        String sql = "INSERT INTO utilisateur (nom, prenom, Role, NumeroDeTelephone, Email, MotDePasse, photo_d) " +
-                "VALUES (?, ?, ?, ?, ?, ?,?)";
+    public void ajouter(User user) throws SQLException {
+        String sql = "INSERT INTO user (email, roles, password, nom, prenom, numerodetelephone, photo_d) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            preparedStatement.setString(1, utilisateur.getNom());
-            preparedStatement.setString(2, utilisateur.getPrenom());
-            preparedStatement.setString(3, utilisateur.getRole().name());
-            preparedStatement.setInt(4, utilisateur.getNumeroDeTelephone());
-            preparedStatement.setString(5, utilisateur.getEmail());
-            preparedStatement.setString(6, utilisateur.getMotDePasse());
-            preparedStatement.setString(7,utilisateur.getPhoto_d());
+            preparedStatement.setString(1, user.getEmail());
+            preparedStatement.setString(2, user.getRoles());
+            preparedStatement.setString(3, user.getPassword());
+            preparedStatement.setString(4, user.getNom());
+            preparedStatement.setString(5, user.getPrenom());
+            preparedStatement.setInt(6, user.getNumerodetelephone());
+            preparedStatement.setString(7,user.getPhoto_d());
 
             preparedStatement.executeUpdate();
 
             try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
-                    utilisateur.setId(generatedKeys.getInt(1));
+                    user.setId(generatedKeys.getInt(1));
                 } else {
                     throw new SQLException("Échec de la récupération de l'ID après l'ajout de l'utilisateur.");
                 }
@@ -159,17 +158,19 @@ public class utilisateurServices implements Iservices<utilisateur> {
         }
     }
 
+
     @Override
-    public void modifier(utilisateur utilisateur) throws SQLException {
-        String sql = "UPDATE `utilisateur` SET `Nom`=?,`Prenom`=?,`role`=?,`NumeroDeTelephone`=?,`Email`=?,`MotDePasse`=? WHERE `id`=?";
+    public void modifier(User user) throws SQLException {
+        String sql = "UPDATE `user` SET `email`=?,`roles`=?,`password`=?,`nom`=?,`prenom`=?,`numerodetelephone`=?,`photo_d`=? WHERE `id`=?";
         try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
-            preparedStatement.setString(1, utilisateur.getNom());
-            preparedStatement.setString(2, utilisateur.getPrenom());
-            preparedStatement.setString(3, utilisateur.getRole().toString());
-            preparedStatement.setInt(4, utilisateur.getNumeroDeTelephone());
-            preparedStatement.setString(5, utilisateur.getEmail());
-            preparedStatement.setString(6, utilisateur.getMotDePasse());
-            preparedStatement.setInt(7, utilisateur.getId());
+            preparedStatement.setString(1, user.getEmail());
+            preparedStatement.setString(2, user.getRoles());
+            preparedStatement.setString(3, user.getPassword());
+            preparedStatement.setString(4, user.getNom());
+            preparedStatement.setString(5, user.getPrenom());
+            preparedStatement.setInt(6, user.getNumerodetelephone());
+            preparedStatement.setString(7,user.getPhoto_d());
+            preparedStatement.setInt(8, user.getId());
             preparedStatement.executeUpdate();
         }catch(SQLException err){
             System.out.println(err.getMessage());
@@ -177,61 +178,62 @@ public class utilisateurServices implements Iservices<utilisateur> {
     }
 
     @Override
-    public void supprimer(utilisateur utilisateur) throws SQLException {
-        String sql = "DELETE FROM utilisateur WHERE id=?";
+    public void supprimer(User user) throws SQLException {
+        String sql = "DELETE FROM user WHERE id=?";
 
         try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
-            preparedStatement.setInt(1, utilisateur.getId());
+            preparedStatement.setInt(1, user.getId());
             preparedStatement.executeUpdate();
         }
     }
 
     @Override
-    public List<utilisateur> afficher() throws SQLException {
-        String req = "SELECT * FROM utilisateur";
-        List<utilisateur> utilisateurs = new ArrayList<>();
+    public List<User> afficher() throws SQLException {
+        String req = "SELECT * FROM user";
+        List<User> utilisateurs = new ArrayList<>();
 
         try (Statement st = conn.createStatement();
              ResultSet rs = st.executeQuery(req)) {
 
             while (rs.next()) {
-                utilisateur user = new utilisateur(
-                                        rs.getInt("id"),
-                                        rs.getString("nom"),
-                                        rs.getString("prenom"),
-                        rs.getString("Email"),
-                        rs.getString("MotDePasse"),
-                        UserRole.valueOf(rs.getString("Role")),
-                        rs.getInt("NumeroDeTelephone")
+                User user = new User(
+                        rs.getInt("id"),
+                        rs.getString("email"),
+                        rs.getString("roles"),
+                        rs.getString("password"),
+                        rs.getString("nom"),
+                        rs.getString("prenom"),
+                        rs.getInt("numerodetelephone"),
+                        rs.getString("photo_d")
 
-                                );
+                );
 
                 utilisateurs.add(user);
             }
         }
 
-        return utilisateurs;
-    }
+        return utilisateurs;    }
 
     @Override
-    public int getId(utilisateur utilisateur) {
-        return utilisateur.getId();
+    public int getId(User user) {
+        return user.getId();
     }
 
     @Override
     public int getIdFromObject(Object o) {
-        if (o instanceof utilisateur) {
-            utilisateur user = (utilisateur) o;
+        if (o instanceof User) {
+            User user = (User) o;
             return user.getId();
         }
-        return 0;
-    }
+        return 0;    }
+
+    // (int id, String email, String roles, String password, String nom, String prenom, int numerodetelephone, String photo_d)
 
     @Override
-    public utilisateur authentifier(String mail, String mdp) {
-        utilisateur p = new utilisateur();
+    public User authentifier(String mail, String mdp) {
+        User p = new User();
         try {
-            String req = "SELECT * FROM utilisateur WHERE Email = ? AND motDePasse = ?";
+            String req = "SELECT * FROM user WHERE email = ? AND password = ?";
             try (PreparedStatement st = conn.prepareStatement(req)) {
                 st.setString(1, mail);
                 st.setString(2, mdp);
@@ -239,45 +241,46 @@ public class utilisateurServices implements Iservices<utilisateur> {
 
                 if (RS.next()) {
                     p.setId(RS.getInt("id"));
-                    p.setNom(RS.getString("Nom"));
-                    p.setPrenom(RS.getString("Prenom"));
+                    p.setNom(RS.getString("nom"));
+                    p.setPrenom(RS.getString("prenom"));
 
-                    String roleString = RS.getString("role");
+                    String roleString = RS.getString("roles");
 
                     if (roleString != null) {
-                        UserRole userRole = UserRole.valueOf(roleString);
-                        p.setRole(userRole);
+                     //   UserRole userRole = UserRole.valueOf(roleString);
+                        p.setRoles(roleString);
                     } else {
                         // Handle the case where the role is null
                         // You might set a default role or throw an exception
                     }
 
-                    p.setNumeroDeTelephone(RS.getInt("numeroDeTelephone"));
-                    p.setEmail(RS.getString("Email"));
-                    p.setMotDePasse(RS.getString("MotDePasse"));
+                    p.setNumerodetelephone(RS.getInt("numerodetelephone"));
+                    p.setEmail(RS.getString("email"));
+                    p.setPassword(RS.getString("password"));
                     p.setPhoto_d(RS.getString("photo_d"));
                 }
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-        return p;
-    }
-    public static List<utilisateur> rechercherUtilisateurs(String nom, String prenom, String email, UserRole role) {
-        List<utilisateur> utilisateurs = new ArrayList<>();
-        StringBuilder query = new StringBuilder("SELECT * FROM utilisateur WHERE 1=1");
+        return p;    }
+
+
+    public static List<User> rechercherUtilisateurs(String nom, String prenom, String email, String role) {
+        List<User> utilisateurs = new ArrayList<>();
+        StringBuilder query = new StringBuilder("SELECT * FROM user WHERE 1=1");
 
         if (nom != null && !nom.isEmpty()) {
-            query.append(" AND Nom LIKE ?");
+            query.append(" AND nom LIKE ?");
         }
         if (prenom != null && !prenom.isEmpty()) {
-            query.append(" AND Prenom LIKE ?");
+            query.append(" AND prenom LIKE ?");
         }
         if (email != null && !email.isEmpty()) {
-            query.append(" AND Email LIKE ?");
+            query.append(" AND email LIKE ?");
         }
         if (role != null) {
-            query.append(" AND role = ?");
+            query.append(" AND roles = ?");
         }
 
         // Assurez-vous que la connexion est initialisée
@@ -297,7 +300,9 @@ public class utilisateurServices implements Iservices<utilisateur> {
                 preparedStatement.setString(index++, "%" + email + "%");
             }
             if (role != null) {
-                preparedStatement.setString(index++, role.name());
+               // preparedStatement.setString(index++, role.name());
+                preparedStatement.setString(index++, "%" + role + "%");
+
             }
 
             try (ResultSet rs = preparedStatement.executeQuery()) {
@@ -311,7 +316,6 @@ public class utilisateurServices implements Iservices<utilisateur> {
 
         return utilisateurs;
     }
-
 
     private static void initConnection() {
         try {
@@ -327,4 +331,7 @@ public class utilisateurServices implements Iservices<utilisateur> {
             // Gérer l'exception, par exemple en affichant un message d'erreur
         }
     }
+
+
+
 }

@@ -37,5 +37,3 @@ build/
 ### Mac OS ###
 .DS_Store
 src/main/resources/videos.properties
-src/main/java/controller/AjouterUtilisateurController.java
-src/main/java/utils/SMS.java

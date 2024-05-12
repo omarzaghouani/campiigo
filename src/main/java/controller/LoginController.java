@@ -1,7 +1,7 @@
 package controller;
 
 import entities.Session;
-import entities.utilisateur;
+import entities.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,7 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import services.utilisateurServices;
+import services.UserService;
 import utils.EmailUser;
 
 import java.io.IOException;
@@ -45,7 +45,7 @@ public class LoginController {
         window.show();
     }
 
-    private void redirectToCampOwnerInterface(ActionEvent actionEvent, utilisateur user) throws IOException {
+    private void redirectToCampOwnerInterface(ActionEvent actionEvent, User user) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/HomeClient.fxml"));
         Parent adminParent = loader.load();
         HomeClientController controller = loader.getController();
@@ -61,7 +61,7 @@ public class LoginController {
         window.show();
     }
 
-    private void redirectToSimpleUserInterface(ActionEvent actionEvent, utilisateur user) throws IOException {
+    private void redirectToSimpleUserInterface(ActionEvent actionEvent, User user) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/HomeClient.fxml"));
         Parent adminParent = loader.load();
         HomeClientController controller = loader.getController();
@@ -79,8 +79,8 @@ public class LoginController {
 
     @FXML
     public void GoToInterface(ActionEvent event) throws IOException {
-        utilisateurServices us = new utilisateurServices();
-        utilisateur user = us.authentifier(emailTextField.getText(), passwordTextField.getText());
+        UserService us = new UserService();
+        User user = us.authentifier(emailTextField.getText(), passwordTextField.getText());
 
         if (user != null) {
             // Créer une session avec l'utilisateur authentifié
@@ -93,19 +93,24 @@ public class LoginController {
                 Session session = Session.getInstance();
                 session.setUser(user);
                 Session.getInstance();
-                switch (user.getRole()) {
-                    case Admin:
+                System.out.println("shouu");
+                switch (user.getRoles()) {
+                    case "[\"ROLE_ADMIN\"]":
                         // Redirect to the admin interface
                         redirectToAdminInterface(event);
+                        System.out.println("bouu");
+
                         break;
-                    case Camp_Owner:
+                    case "[\"ROLE_USER\"]":
                         // Redirect to the camp owner interface
                         redirectToCampOwnerInterface(event, user); // Passer l'utilisateur authentifié
+                        System.out.println("touu");
+
                         break;
-                    case Simple_User:
+                   /* case Simple_User:
                         // Redirect to the simple user interface
                         redirectToSimpleUserInterface(event, user); // Passer l'utilisateur authentifié
-                        break;
+                        break; */
                     default:
                         // Handle other roles or unknown roles
                         break;
@@ -130,10 +135,10 @@ public class LoginController {
 
         // Générer un mot de passe par défaut
         String defaultPassword = generateDefaultPassword();
-        utilisateurServices us = new utilisateurServices();
-        utilisateur user = utilisateurServices.getUtilisateurByEmail(email); // Assurez-vous d'avoir cette méthode
+        UserService us = new UserService();
+        User user = UserService.getUtilisateurByEmail(email); // Assurez-vous d'avoir cette méthode
         if (user != null) {
-            user.setMotDePasse(defaultPassword); // Mettre à jour le mot de passe de l'utilisateur
+            user.setPassword(defaultPassword); // Mettre à jour le mot de passe de l'utilisateur
             us.modifier(user); // Mettre à jour l'utilisateur dans la base de données
         } else {
             showAlert("L'utilisateur avec l'adresse e-mail " + email + " n'a pas été trouvé.", Alert.AlertType.ERROR);

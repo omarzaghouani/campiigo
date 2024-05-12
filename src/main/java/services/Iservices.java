@@ -1,6 +1,6 @@
 package services;
 
-import entities.utilisateur;
+import entities.User;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -59,5 +59,5 @@ public interface Iservices<T> {
      * @return L'ID de l'objet, ou 0 si l'objet n'est pas de type T.
      */
     int getIdFromObject(Object o);
-    utilisateur authentifier(String mail, String mdp);
+    User authentifier(String mail, String mdp);
 }

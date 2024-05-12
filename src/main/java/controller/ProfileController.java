@@ -3,7 +3,7 @@ package controller;
 import com.github.sarxos.webcam.Webcam;
 import entities.ImageSingleton;
 import entities.Session;
-import entities.utilisateur;
+import entities.User;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,7 +18,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import services.utilisateurServices;
+import services.UserService;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -45,20 +45,23 @@ public class ProfileController implements Initializable {
     @FXML
     private TextField userEmailText;
     @FXML
-    private TextField userRoleText;
+    private TextField userNumTel;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        utilisateur user = Session.getInstance().getUser();
+        User user = Session.getInstance().getUser();
         if (user != null) {
             // Log des données de l'utilisateur pour vérifier qu'elles sont correctement récupérées
-            System.out.println("Utilisateur connecté : " + utilisateur.getNom() + " " + utilisateur.getPrenom());
-            System.out.println("Email : " + utilisateur.getEmail());
-            System.out.println("Role : " + utilisateur.getRole().toString());
+            System.out.println("Utilisateur connecté : " + user.getNom() + " " + user.getPrenom());
+            System.out.println("Email : " + user.getEmail());
+            System.out.println("Role : " + user.getRoles().toString());
 
-            userNameText.setText(utilisateur.getNom() + " " + utilisateur.getPrenom());
-            userEmailText.setText(utilisateur.getEmail());
-            userRoleText.setText(utilisateur.getRole().toString());
+            userNameText.setText(user.getNom() + " " + user.getPrenom());
+            userEmailText.setText(user.getEmail());
+            userNumTel.setText(String.valueOf(user.getNumerodetelephone()));
+
+            //   userRoleText.setText(user.getRoles());
         } else {
             System.out.println("Aucun utilisateur connecté.");
             // Gérer le cas où aucun utilisateur n'est connecté
@@ -96,8 +99,8 @@ public class ProfileController implements Initializable {
             profileImageView.setImage(fxImage);
 
             // Enregistrez l'image dans la base de données et mettez à jour l'utilisateur
-            utilisateurServices us = new utilisateurServices();
-            utilisateur user = Session.getInstance().getUser();
+            UserService us = new UserService();
+            User user = Session.getInstance().getUser();
             if (user != null) {
                 // Convertissez l'image JavaFX en byte[] pour l'enregistrement dans la base de données
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -121,7 +124,7 @@ public class ProfileController implements Initializable {
         }
         return fxImage;
     }
-    public void setUser(utilisateur user) {
+    public void setUser(User user) {
         // Appeler la méthode pour initialiser l'interface utilisateur avec les informations de l'utilisateur
         initialize(null, null);
     }

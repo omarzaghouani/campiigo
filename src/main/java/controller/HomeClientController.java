@@ -1,7 +1,7 @@
 package controller;
 
 import entities.Session;
-import entities.utilisateur;
+import entities.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -41,7 +41,7 @@ public class HomeClientController {
     public  TextField userEmailText;
     @FXML
     public   TextField userNumTel;
-utilisateur user;
+    User user;
 
     @FXML
     private void GoToProfile() throws IOException {
@@ -90,7 +90,7 @@ utilisateur user;
             });
 
             // Récupérer l'image de profil de l'utilisateur
-            Image capturedImage = getUserProfileImage(utilisateur.getId());
+            Image capturedImage = getUserProfileImage(user.getId());
             if (capturedImage != null) {
                 profileImage.setImage(capturedImage);
             }
@@ -180,7 +180,7 @@ utilisateur user;
             // Gérer l'exception URISyntaxException
         }
     }
-    public void setUser(utilisateur user) {
+    public void setUser(User user) {
         this.user = user;
         loadUserProfileImage();
 
@@ -191,7 +191,7 @@ utilisateur user;
         if (user != null) {
             userNameText.setText(user.getNom() );
             userEmailText.setText(user.getEmail());
-            userNumTel.setText(String.valueOf(user.getNumeroDeTelephone()));
+            userNumTel.setText(String.valueOf(user.getNumerodetelephone()));
             loadUserProfileImage();
 
         }
