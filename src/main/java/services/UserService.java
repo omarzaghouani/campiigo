@@ -1,6 +1,7 @@
 package services;
 
 import entities.User;
+import org.mindrot.jbcrypt.BCrypt;
 import utils.DataSource;
 
 import java.sql.*;
@@ -134,13 +135,16 @@ public class UserService implements Iservices<User>{
 
     @Override
     public void ajouter(User user) throws SQLException {
+        String encodedPassword = PasswordEncoder.encode(user.getPassword());
+
         String sql = "INSERT INTO user (email, roles, password, nom, prenom, numerodetelephone, photo_d) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, user.getEmail());
             preparedStatement.setString(2, user.getRoles());
-            preparedStatement.setString(3, user.getPassword());
+           // preparedStatement.setString(3, user.getPassword());
+            preparedStatement.setString(3, encodedPassword);
             preparedStatement.setString(4, user.getNom());
             preparedStatement.setString(5, user.getPrenom());
             preparedStatement.setInt(6, user.getNumerodetelephone());
@@ -233,37 +237,46 @@ public class UserService implements Iservices<User>{
     public User authentifier(String mail, String mdp) {
         User p = new User();
         try {
-            String req = "SELECT * FROM user WHERE email = ? AND password = ?";
+            String req = "SELECT * FROM user WHERE email = ?";
             try (PreparedStatement st = conn.prepareStatement(req)) {
                 st.setString(1, mail);
-                st.setString(2, mdp);
                 ResultSet RS = st.executeQuery();
 
                 if (RS.next()) {
-                    p.setId(RS.getInt("id"));
-                    p.setNom(RS.getString("nom"));
-                    p.setPrenom(RS.getString("prenom"));
+                    String encodedPassword = RS.getString("password");
+                    boolean passwordMatch = BCrypt.checkpw(mdp, encodedPassword);
+                    if (passwordMatch) {
+                        p.setId(RS.getInt("id"));
+                        p.setNom(RS.getString("nom"));
+                        p.setPrenom(RS.getString("prenom"));
 
-                    String roleString = RS.getString("roles");
+                        String roleString = RS.getString("roles");
 
-                    if (roleString != null) {
-                     //   UserRole userRole = UserRole.valueOf(roleString);
-                        p.setRoles(roleString);
+                        if (roleString != null) {
+                            //   UserRole userRole = UserRole.valueOf(roleString);
+                            p.setRoles(roleString);
+                        } else {
+                            // Handle the case where the role is null
+                            // You might set a default role or throw an exception
+                        }
+
+                        p.setNumerodetelephone(RS.getInt("numerodetelephone"));
+                        p.setEmail(RS.getString("email"));
+                        p.setPassword(RS.getString("password"));
+                        p.setPhoto_d(RS.getString("photo_d"));
                     } else {
-                        // Handle the case where the role is null
-                        // You might set a default role or throw an exception
+                        System.out.println("wrong creds");
+                         return null;
                     }
 
-                    p.setNumerodetelephone(RS.getInt("numerodetelephone"));
-                    p.setEmail(RS.getString("email"));
-                    p.setPassword(RS.getString("password"));
-                    p.setPhoto_d(RS.getString("photo_d"));
+
                 }
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-        return p;    }
+        return p;
+    }
 
 
     public static List<User> rechercherUtilisateurs(String nom, String prenom, String email, String role) {
@@ -330,6 +343,29 @@ public class UserService implements Iservices<User>{
 
             // Gérer l'exception, par exemple en affichant un message d'erreur
         }
+    }
+
+    public static boolean userExistsWithEmail(String email) {
+        String req = "SELECT COUNT(*) FROM user WHERE email = ?";
+        try {
+            if (conn == null) {
+                initConnection();
+            }
+
+            try (PreparedStatement preparedStatement = conn.prepareStatement(req)) {
+                preparedStatement.setString(1, email);
+
+                try (ResultSet rs = preparedStatement.executeQuery()) {
+                    if (rs.next()) {
+                        int count = rs.getInt(1);
+                        return count > 0;
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erreur lors de la vérification de l'existence de l'utilisateur par e-mail. Détails : " + ex.getMessage(), ex);
+        }
+        return false;
     }
 
 

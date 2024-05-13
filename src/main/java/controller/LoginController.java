@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import services.PasswordEncoder;
 import services.UserService;
 import utils.EmailUser;
 
@@ -120,6 +121,10 @@ public class LoginController {
                 showAlert("Authentication failed. Please check your credentials.", Alert.AlertType.ERROR);
             }
         }
+        else {
+            showAlert("Authentication failed. Please check your credentials.", Alert.AlertType.ERROR);
+
+        }
     }
 
 
@@ -138,20 +143,17 @@ public class LoginController {
         UserService us = new UserService();
         User user = UserService.getUtilisateurByEmail(email); // Assurez-vous d'avoir cette méthode
         if (user != null) {
-            user.setPassword(defaultPassword); // Mettre à jour le mot de passe de l'utilisateur
+            String encodedPassword = PasswordEncoder.encode(defaultPassword);
+            user.setPassword(encodedPassword); // Mettre à jour le mot de passe de l'utilisateur
             us.modifier(user); // Mettre à jour l'utilisateur dans la base de données
         } else {
             showAlert("L'utilisateur avec l'adresse e-mail " + email + " n'a pas été trouvé.", Alert.AlertType.ERROR);
         }
-
-
         // Envoyer un e-mail avec le mot de passe par défaut
         String subject = "Réinitialisation de votre mot de passe";
         String message = "Votre mot de passe a été réinitialisé. Voici votre nouveau mot de passe : " + defaultPassword;
         EmailUser.sendEmailU(email, subject, message);
-
         showAlert("Un e-mail avec votre nouveau mot de passe a été envoyé à " + email + ".", Alert.AlertType.INFORMATION);
-
         // Après l'envoi de l'e-mail
 
     }

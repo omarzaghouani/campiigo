@@ -30,17 +30,17 @@
          <font>
             <Font name="System Bold" size="20.0" />
          </font></Label>
-        <TextField fx:id="userNameText" editable="false" />
+        <TextField fx:id="userNameText" />
         <Label prefHeight="30.0" prefWidth="111.0" text="Email:" textFill="#ebcc13">
          <font>
             <Font name="System Bold" size="20.0" />
          </font></Label>
-        <TextField fx:id="userEmailText" editable="false" />
+        <TextField fx:id="userEmailText" />
         <Label prefHeight="30.0" prefWidth="240.0" text="Numero De Telephone:" textFill="#ebcc13">
          <font>
             <Font name="System Bold" size="20.0" />
          </font></Label>
-        <TextField fx:id="userNumTel" editable="false" />
+        <TextField fx:id="userNumTel" />
         <Button fx:id="modifierButton" onAction="#EditProfile" style="-fx-background-color: #ef5e10;" text="Modifier">
          <font>
             <Font size="17.0" />

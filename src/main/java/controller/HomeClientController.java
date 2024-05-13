@@ -26,7 +26,7 @@ import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
 
-public class HomeClientController {
+public class HomeClientController  {
     @FXML
     public Button profileButton;
     @FXML
@@ -135,6 +135,7 @@ public class HomeClientController {
 
     private Image getUserProfileImage(int userId) {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/campigo", "root", "")) {
+            System.out.println("AHAWWWAAAAAAAA  : " + userId );
             String query = "SELECT photo_d FROM utilisateur WHERE id = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setInt(1, userId);
@@ -182,7 +183,9 @@ public class HomeClientController {
     }
     public void setUser(User user) {
         this.user = user;
-        loadUserProfileImage();
+      //  loadUserProfileImage();
+        profileImage.setImage(new Image(user.getPhoto_d()));
+
 
 
     }
